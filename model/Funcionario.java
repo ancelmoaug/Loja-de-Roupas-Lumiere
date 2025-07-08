@@ -1,60 +1,18 @@
-package Model;
-
-
-public class Funcionario {
-    private String nomeCompleto;
-    private String dataNascimento;
-    private String endereco;
-    private String email;
-    private String telefone;
+public class Funcionario extends Usuario {
     private String cargo;
     private String dataAdmissao;
     private double salario;
 
-    public Funcionario(String nomeCompleto, String dataNascimento,
-                       String endereco, String email, String telefone,
-                       String cargo, String dataAdmissao, double salario) {
-        this.nomeCompleto = nomeCompleto;
-        this.dataNascimento = dataNascimento;
-        this.endereco = endereco;
-        this.email = email;
-        this.telefone = telefone;
+
+    public Funcionario(String nome, String senha, String dataNascimento,
+                       String cpf, String telefone, String endereco,
+                       String email, String cargo, String dataAdmissao, double salario) {
+        super(nome, senha, dataNascimento, cpf, telefone, endereco, email);
         this.cargo = cargo;
         this.dataAdmissao = dataAdmissao;
         this.salario = salario;
     }
 
-    
-    public String getNomeCompleto() {
-        return nomeCompleto;
-    }
-    public void setNomeCompleto(String nomeCompleto) {
-        this.nomeCompleto = nomeCompleto;
-    }
-    public String getDataNascimento() {
-        return dataNascimento;
-    }
-    public void setDataNascimento(String dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
-    public String getEndereco() {
-        return endereco;
-    }
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-    public String getEmail() {
-        return email;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    public String getTelefone() {
-        return telefone;
-    }
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
     public String getCargo() {
         return cargo;
     }

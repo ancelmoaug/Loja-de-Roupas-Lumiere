@@ -1,5 +1,3 @@
-package Model;
-
 public class Relatorio {
     private String dataRelatorio;
     private String tipoRelatorio;       

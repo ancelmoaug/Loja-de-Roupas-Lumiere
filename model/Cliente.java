@@ -1,22 +1,16 @@
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class Cliente {
+public class Cliente extends Usuario {
 
-    private String CPF;
-    private Date dataNascimento;
-    private String contato;
-    private String endereco;
-
-    private static List<Cliente> clientes = new ArrayList<>();
+    private static List<Cliente> clientes;
 
  
-    public Cliente(String CPF, Date dataNascimento, String contato, String endereco) {
-        this.CPF = CPF;
-        this.dataNascimento = dataNascimento;
-        this.contato = contato;
-        this.endereco = endereco;
+    public Cliente(String nome, String senha, String dataNascimento,
+                       String cpf, String telefone, String endereco,
+                       String email, String cargo) {
+        super(nome, senha, dataNascimento, cpf, telefone, endereco, email);
+        clientes = new ArrayList<Cliente>();
     }
 
 
@@ -26,7 +20,7 @@ public class Cliente {
 
     public static void atualizarCliente(String cpf, Cliente novoCliente) {
         for (int i = 0; i < clientes.size(); i++) {
-            if (clientes.get(i).CPF.equals(cpf)) {
+            if (clientes.get(i).getCpf().equals(cpf)) {
                 clientes.set(i, novoCliente);
                 break;
             }
@@ -34,7 +28,7 @@ public class Cliente {
     }
 
     public static void removerCliente(String cpf) {
-        clientes.removeIf(cliente -> cliente.CPF.equals(cpf));
+        clientes.removeIf(cliente -> cliente.getCpf().equals(cpf));
     }
 
     public static void listarClientes() {
@@ -45,7 +39,7 @@ public class Cliente {
 
     public static Cliente pesquisarCliente(String cpf) {
         for (Cliente cliente : clientes) {
-            if (cliente.CPF.equals(cpf)) {
+            if (cliente.getCpf().equals(cpf)) {
                 return cliente;
             }
         }
@@ -55,10 +49,10 @@ public class Cliente {
     @Override
     public String toString() {
         return "Cliente{" +
-                "CPF='" + CPF + '\'' +
-                ", dataNascimento=" + dataNascimento +
-                ", contato='" + contato + '\'' +
-                ", endereco='" + endereco + '\'' +
+                "CPF='" + getCpf() + '\'' +
+                ", dataNascimento=" + getDataDeNascimento() +
+                ", contato='" + getTelefone() + '\'' +
+                ", endereco='" + getEndereco() + '\'' +
                 '}';
     }
 

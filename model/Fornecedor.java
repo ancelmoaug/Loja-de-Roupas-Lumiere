@@ -1,4 +1,4 @@
-//import java.util.ArrayList;
+import java.util.ArrayList;
 
 public class Fornecedor {
     private String razaoSocial;
@@ -8,7 +8,7 @@ public class Fornecedor {
     private String telefoneComercial;
     private String emailComercial;
 
-    //private ArrayList<Produto> produtosFornecidos;
+    private ArrayList<Produto> produtosFornecidos;
 
 
     public Fornecedor(String razaoSocial, String nomeComercial, String cnpj, String endereco, String telefoneComercial,
@@ -71,7 +71,7 @@ public class Fornecedor {
         this.emailComercial = emailComercial;
     }
 
-    /*public void adicionarProdutoFornecido(Produto produto) {
+    public void adicionarProdutoFornecido(Produto produto) {
         produtosFornecidos.add(produto);
-    }*/
+    }
 }
