@@ -1,3 +1,5 @@
+package model;
+
 public class Funcionario extends Usuario {
     private String cargo;
     private String dataAdmissao;

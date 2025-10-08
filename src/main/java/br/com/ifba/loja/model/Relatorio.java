@@ -1,3 +1,5 @@
+package model;
+
 public class Relatorio {
     private String dataRelatorio;
     private String tipoRelatorio;       
