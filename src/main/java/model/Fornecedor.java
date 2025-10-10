@@ -1,8 +1,9 @@
 package model;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 public class Fornecedor {
+    /* 
     private String razaoSocial;
     private String nomeComercial;
     private String cnpj;
@@ -76,4 +77,6 @@ public class Fornecedor {
     public void adicionarProdutoFornecido(Produto produto) {
         produtosFornecidos.add(produto);
     }
+
+    */
 }
