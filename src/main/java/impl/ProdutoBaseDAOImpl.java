@@ -6,17 +6,17 @@ public class ProdutoBaseDAOImpl implements ProdutoBaseDAO {
 
     /*
     @Override
-    void salvar(ProdutoBase produto) {
+    ProdutoBase inserir(ProdutoBase produto) {
         // código do CRUD com o BD
     }
 
     @Override
-    void atualizar(ProdutoBase produto) {
+    boolean atualizar(ProdutoBase produto) {
         // código do CRUD com o BD
     }
 
     @Override
-    void deletar(int id) {
+    boolean deletar(int id) {
         // código do CRUD com o BD
     }
 

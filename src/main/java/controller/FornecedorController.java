@@ -3,15 +3,21 @@ package controller;
 
 public class FornecedorController {
     /*
-    void inserirFornecedor(Fornecedor fornecedor) {
+    Fornecedor inserirFornecedor(String razaoSocial, String nomeComercial, String cnpj, 
+                                String estado, String municipio, String cep, String bairro, String rua,
+                                String numero, String complemento,
+                                String telefoneComercial, String emailComercial) {
         // código do CRUD com o BD
     }
 
-    void atualizar(Fornecedor fornecedor) {
+    boolean atualizar(int id, String razaoSocial, String nomeComercial, String cnpj, 
+                                String estado, String municipio, String cep, String bairro, String rua,
+                                String numero, String complemento,
+                                String telefoneComercial, String emailComercial) {
         // código do CRUD com o BD
     }
 
-    void deletar(int id) {
+    boolean deletar(int id) {
         // código do CRUD com o BD
     }
 

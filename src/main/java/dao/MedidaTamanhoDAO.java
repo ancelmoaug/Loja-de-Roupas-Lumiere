@@ -2,9 +2,9 @@ package dao;
 
 public interface MedidaTamanhoDAO {
     /*
-    void salvar(MedidaTamanho medida);
-    void atualizar(MedidaTamanho medida);
-    void deletar(int id);
+    MedidaTamanho inserir(MedidaTamanho medida);
+    boolean atualizar(MedidaTamanho medida);
+    boolean deletar(int id);
     MedidaTamanho buscarPorId(int id);
     List<MedidaTamanho> listarTodos();
 

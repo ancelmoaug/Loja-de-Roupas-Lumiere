@@ -3,15 +3,17 @@ package controller;
 
 public class MedidaTamanhoController {
     /*
-    void inserirMedidaTamanho(MedidaTamanho medida) {
+    MedidaTamanho inserirMedidaTamanho(int idProdutoBase, int idTamanho, int comprimento, int quadril,
+                                int cintura, int busto, int manga) {
         // código do CRUD com o BD
     }
 
-    void atualizar(MedidaTamanho medida) {
+    boolean atualizar(int id, int idProdutoBase, int idTamanho, int comprimento, int quadril,
+                            int cintura, int busto, int manga) {
         // código do CRUD com o BD
     }
 
-    void deletar(int id) {
+    boolean deletar(int id) {
         // código do CRUD com o BD
     }
 

@@ -3,15 +3,25 @@ package controller;
 
 public class FuncionarioController {
     /*
-    void salvar(Funcionario funcionario) {
+    Funcionario inserirFuncionario(String nome, String sobrenome, int anoNascimento, int mesNascimento,
+                         int diaNascimento, String senha, String cpf, String email, 
+                         String codigoAgenciaBanco, String numeroContaBanco, String codigoBanco,
+                         String estado, String municipio, String cep, String bairro, String rua,
+                         String numeroEndereco, String complementoEndereco, String telefone,
+                         String cargo, LocalDate dataDeAdmissao, double salario) {
         // código do CRUD com o BD
     }
 
-    void atualizar(Funcionario funcionario) {
+    boolean atualizar(int id, String nome, String sobrenome, int anoNascimento, int mesNascimento,
+                         int diaNascimento, String senha, String cpf, String email, 
+                         String codigoAgenciaBanco, String numeroContaBanco, String codigoBanco,
+                         String estado, String municipio, String cep, String bairro, String rua,
+                         String numeroEndereco, String complementoEndereco, String telefone,
+                         String cargo, LocalDate dataDeAdmissao, double salario) {
         // código do CRUD com o BD
     }
 
-    void deletar(int id) {
+    boolean deletar(int id) {
         // código do CRUD com o BD
     }
 

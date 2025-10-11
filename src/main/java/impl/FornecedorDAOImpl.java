@@ -5,17 +5,17 @@ import dao.FornecedorDAO;
 public class FornecedorDAOImpl implements FornecedorDAO {
     /*
     @Override
-    void inserir(Fornecedor fornecedor) {
+    Fornecedor inserir(Fornecedor fornecedor) {
         // código do CRUD com o BD
     }
 
     @Override
-    void atualizar(Fornecedor fornecedor) {
+    boolean atualizar(Fornecedor fornecedor) {
         // código do CRUD com o BD
     }
 
     @Override
-    void deletar(int id) {
+    boolean deletar(int id) {
         // código do CRUD com o BD
     }
 

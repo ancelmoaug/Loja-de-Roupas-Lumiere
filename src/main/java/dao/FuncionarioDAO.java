@@ -2,9 +2,9 @@ package dao;
 
 public interface FuncionarioDAO {
     /*
-    void inserir(Funcionario funcionario);
-    void atualizar(Funcionario funcionario);
-    void deletar(int id);
+    Funcionario inserir(Funcionario funcionario);
+    boolean atualizar(Funcionario funcionario);
+    boolean deletar(int id);
     Funcionario buscarPorId(int id);
     List<Funcionario> listarTodos();
 

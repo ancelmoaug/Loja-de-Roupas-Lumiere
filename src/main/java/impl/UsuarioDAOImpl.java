@@ -5,17 +5,17 @@ import dao.UsuarioDAO;
 public class UsuarioDAOImpl implements UsuarioDAO {
     /*
     @Override
-    void inserir(Usuario usuario) {
+    Usuario inserir(Usuario usuario) {
         // código do CRUD com o BD
     }
 
     @Override
-    void atualizar(Usuario usuario) {
+    boolean atualizar(Usuario usuario) {
         // código do CRUD com o BD
     }
 
     @Override
-    void deletar(int id) {
+    boolean deletar(int id) {
         // código do CRUD com o BD
     }
 

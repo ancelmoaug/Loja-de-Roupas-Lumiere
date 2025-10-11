@@ -3,15 +3,17 @@ package controller;
 
 public class VariacaoProdutoController {
     /* 
-    void inserirVariacaoProduto(VariacaoProduto variacao) {
+    VariacaoProduto inserirVariacaoProduto(int idProdutoBase, String nomeCor, String hexadecimalCor,
+                                            int idTamanho, int quantidadeEmEstoque, String urlImagem) {
         // código do CRUD com o BD
     }
 
-    void atualizar(VariacaoProduto variacao) {
+    boolean atualizar(int id, int idProdutoBase, String nomeCor, String hexadecimalCor,
+                        int idTamanho, int quantidadeEmEstoque, String urlImagem) {
         // código do CRUD com o BD
     }
 
-    void deletar(int id) {
+    boolean deletar(int id) {
         // código do CRUD com o BD
     }
 

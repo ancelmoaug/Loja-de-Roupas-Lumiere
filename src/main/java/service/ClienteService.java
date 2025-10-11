@@ -4,15 +4,15 @@ package service;
 public class ClienteService {
     /*
 
-    void inserirCliente(Cliente cliente){ 
+    Cliente inserirCliente(Cliente cliente){ 
 
     }
 
-    void atualizar(Cliente cliente) {
+    boolean atualizar(Cliente cliente) {
         // código do CRUD com o BD
     }
 
-    void deletar(int id) {
+    boolean deletar(int id) {
         // código do CRUD com o BD
     }
 

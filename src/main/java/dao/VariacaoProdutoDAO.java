@@ -1,12 +1,11 @@
 package dao;
 
-//import java.util.List;
 
 public interface VariacaoProdutoDAO {
     /* 
-    void salvar(VariacaoProduto variacao);
-    void atualizar(VariacaoProduto variacao);
-    void deletar(int id);
+    VariacaoProduto inserir(VariacaoProduto variacao);
+    boolean atualizar(VariacaoProduto variacao);
+    boolean deletar(int id);
     VariacaoProduto buscarPorId(int id);
     List<VariacaoProduto> listarTodas();
 

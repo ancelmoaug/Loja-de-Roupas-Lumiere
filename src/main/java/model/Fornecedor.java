@@ -11,11 +11,11 @@ public class Fornecedor {
     private String telefoneComercial;
     private String emailComercial;
 
-    private ArrayList<Produto> produtosFornecidos;
+    private List<Produto> produtosFornecidos;
 
 
-    public Fornecedor(String razaoSocial, String nomeComercial, String cnpj, String endereco, String telefoneComercial,
-            String emailComercial) {
+    public Fornecedor(String razaoSocial, String nomeComercial, String cnpj, String endereco, 
+                      String telefoneComercial, String emailComercial) {
         this.razaoSocial = razaoSocial;
         this.nomeComercial = nomeComercial;
         this.cnpj = cnpj;

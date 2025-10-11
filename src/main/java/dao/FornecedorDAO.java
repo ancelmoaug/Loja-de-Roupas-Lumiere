@@ -2,9 +2,9 @@ package dao;
 
 public interface FornecedorDAO {
     /*
-    void inserir(Fornecedor fornecedor);
-    void atualizar(Fornecedor fornecedor);
-    void deletar(int id);
+    Fornecedor inserir(Fornecedor fornecedor);
+    boolean atualizar(Fornecedor fornecedor);
+    boolean deletar(int id);
     Fornecedor buscarPorId(int id);
     List<Fornecedor> listarTodos();
 

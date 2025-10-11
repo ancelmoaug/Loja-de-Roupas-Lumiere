@@ -5,17 +5,17 @@ import dao.FuncionarioDAO;
 public class FuncionarioDAOImpl implements FuncionarioDAO {
     /*
     @Override
-    void inserir(Funcionario funcionario) {
+    Funcionario inserir(Funcionario funcionario) {
         // código do CRUD com o BD
     }
 
     @Override
-    void atualizar(Funcionario funcionario) {
+    boolean atualizar(Funcionario funcionario) {
         // código do CRUD com o BD
     }
 
     @Override
-    void deletar(int id) {
+    boolean deletar(int id) {
         // código do CRUD com o BD
     }
 

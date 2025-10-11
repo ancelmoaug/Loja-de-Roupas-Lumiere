@@ -4,15 +4,18 @@ package controller;
 public class ProdutoBaseController {
 
     /*
-    void inserirProdutoBase(ProdutoBase produto) {
+    ProdutoBase inserirProdutoBase(String nome, String descricao, double precoBase, String categoria
+                                    int idFornecedor) {
         // código do CRUD com o BD
     }
 
-    void atualizar(ProdutoBase produto) {
+    boolean atualizar(int id, String nome, String descricao, double precoBase, String categoria
+                                int idFornecedor, List<Integer> idsMedidasTamanho, int idCategoria
+                                ) {
         // código do CRUD com o BD
     }
 
-    void deletar(int id) {
+    boolean deletar(int id) {
         // código do CRUD com o BD
     }
 

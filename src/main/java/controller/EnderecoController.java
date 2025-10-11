@@ -4,15 +4,17 @@ package controller;
 public class EnderecoController {
     /* 
 
-    void inserirEndereco(Endereco endereco) {
+    Endereco inserirEndereco(String estado, String municipio, String cep, String bairro, String rua,
+                         String numero, String complemento) {
         // código do CRUD com o BD
     }
 
-    void atualizar(Endereco endereco) {
+    boolean atualizar(int id, String estado, String municipio, String cep, String bairro, String rua,
+                         String numero, String complemento) {
         // código do CRUD com o BD
     }
 
-    void deletarEndereco(int id) {
+    boolean deletarEndereco(int id) {
         // código do CRUD com o BD
     }
 

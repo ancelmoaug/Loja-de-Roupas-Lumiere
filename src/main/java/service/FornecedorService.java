@@ -4,15 +4,15 @@ package service;
 public class FornecedorService {
     /*
 
-    void inserirFornecedor(Fornecedor fornecedor) {
+    Fornecedor inserirFornecedor(Fornecedor fornecedor) {
         // código do CRUD com o BD
     }
 
-    void atualizar(Fornecedor fornecedor) {
+    boolean atualizar(Fornecedor fornecedor) {
         // código do CRUD com o BD
     }
 
-    void deletar(int id) {
+    boolean deletar(int id) {
         // código do CRUD com o BD
     }
 

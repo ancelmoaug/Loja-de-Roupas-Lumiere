@@ -2,9 +2,9 @@ package dao;
 
 public interface TelefoneDAO {
     /*
-    void salvar(Telefone telefone);
-    void atualizar(Telefone telefone);
-    void deletar(int id);
+    Telefone inserir(Telefone telefone);
+    boolean atualizar(Telefone telefone);
+    boolean deletar(int id);
     Telefone buscarPorId(int id);
     List<Telefone> listarTodos();
 

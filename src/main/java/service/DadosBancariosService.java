@@ -5,15 +5,15 @@ import dao.DadosBancariosDAO;
 public class DadosBancariosService implements DadosBancariosDAO {
     /*
 
-    void inserirDadosBancarios(DadosBancarios dados) {
+    DadosBancarios inserirDadosBancarios(DadosBancarios dados) {
         // código do CRUD com o BD
     }
 
-    void atualizar(DadosBancarios dados) {
+    boolean atualizar(DadosBancarios dados) {
         // código do CRUD com o BD
     }
 
-    void deletar(int id) {
+    boolean deletar(int id) {
         // código do CRUD com o BD
     }
 

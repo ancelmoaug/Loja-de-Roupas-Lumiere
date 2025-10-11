@@ -5,16 +5,17 @@ import dao.ClienteDAO;
 public class ClienteDAOimpl implements ClienteDAO {
     /*
     @Override
-    void inserir(Cliente cliente){
+    Cliente inserir(Cliente cliente){
 
     }
+    
     @Override
-    void atualizar(Cliente cliente) {
+    boolean atualizar(Cliente cliente) {
         // código do CRUD com o BD
     }
 
     @Override
-    void deletar(int id) {
+    boolean deletar(int id) {
         // código do CRUD com o BD
     }
 

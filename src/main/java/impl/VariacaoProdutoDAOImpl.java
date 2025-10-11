@@ -5,17 +5,17 @@ import dao.VariacaoProdutoDAO;
 public class VariacaoProdutoDAOImpl implements VariacaoProdutoDAO {
     /* 
     @Override
-    void salvar(VariacaoProduto variacao) {
+    VariacaoProduto inserir(VariacaoProduto variacao) {
         // código do CRUD com o BD
     }
 
     @Override
-    void atualizar(VariacaoProduto variacao) {
+    boolean atualizar(VariacaoProduto variacao) {
         // código do CRUD com o BD
     }
 
     @Override
-    void deletar(int id) {
+    boolean deletar(int id) {
         // código do CRUD com o BD
     }
 

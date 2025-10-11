@@ -4,9 +4,9 @@ package dao;
 
 public interface DadosBancariosDAO {
     /*
-    void salvar(DadosBancarios dados);
-    void atualizar(DadosBancarios dados);
-    void deletar(int id);
+    DadosBancarios inserir(DadosBancarios dados);
+    boolean atualizar(DadosBancarios dados);
+    boolean deletar(int id);
     DadosBancarios buscarPorId(int id);
     List<DadosBancarios> listarTodos();
 

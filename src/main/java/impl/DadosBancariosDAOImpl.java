@@ -5,17 +5,17 @@ import dao.DadosBancariosDAO;
 public class DadosBancariosDAOImpl implements DadosBancariosDAO {
     /*
     @Override
-    void salvar(DadosBancarios dados) {
+    DadosBancarios inserir(DadosBancarios dados) {
         // código do CRUD com o BD
     }
 
     @Override
-    void atualizar(DadosBancarios dados) {
+    boolean atualizar(DadosBancarios dados) {
         // código do CRUD com o BD
     }
 
     @Override
-    void deletar(int id) {
+    boolean deletar(int id) {
         // código do CRUD com o BD
     }
 

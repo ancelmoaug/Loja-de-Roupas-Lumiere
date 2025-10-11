@@ -4,15 +4,15 @@ package service;
 public class EnderecoService {
     /*
 
-    void inserirEndereco(Endereco endereco) {
+    Endereco inserirEndereco(Endereco endereco) {
         // código do CRUD com o BD
     }
 
-    void atualizar(Endereco endereco) {
+    boolean atualizar(Endereco endereco) {
         // código do CRUD com o BD
     }
 
-    void deletarEndereco(int id) {
+    boolean deletarEndereco(int id) {
         // código do CRUD com o BD
     }
 

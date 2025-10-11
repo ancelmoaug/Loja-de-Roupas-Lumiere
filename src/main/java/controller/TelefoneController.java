@@ -3,15 +3,15 @@ package controller;
 
 public class TelefoneController {
     /*
-    void inserirTelefone(Telefone telefone) {
+    Telefone inserirTelefone(String telefone) {
         // código do CRUD com o BD
     }
 
-    void atualizar(Telefone telefone) {
+    boolean atualizar(int id, String telefone) {
         // código do CRUD com o BD
     }
 
-    void deletar(int id) {
+    boolean deletar(int id) {
         // código do CRUD com o BD
     }
 

@@ -4,15 +4,15 @@ package service;
 public class MedidaTamanhoService {
     /*
 
-    void inserirMedidaTamanho(MedidaTamanho medida) {
+    MedidaTamanho inserirMedidaTamanho(MedidaTamanho medida) {
         // código do CRUD com o BD
     }
 
-    void atualizar(MedidaTamanho medida) {
+    boolean atualizar(MedidaTamanho medida) {
         // código do CRUD com o BD
     }
 
-    void deletar(int id) {
+    boolean deletar(int id) {
         // código do CRUD com o BD
     }
 

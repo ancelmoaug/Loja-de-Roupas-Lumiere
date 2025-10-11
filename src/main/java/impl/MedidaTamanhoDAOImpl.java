@@ -5,17 +5,17 @@ import dao.MedidaTamanhoDAO;
 public class MedidaTamanhoDAOImpl implements MedidaTamanhoDAO {
     /*
     @Override
-    void salvar(MedidaTamanho medida) {
+    MedidaTamanho inserir(MedidaTamanho medida) {
         // código do CRUD com o BD
     }
 
     @Override
-    void atualizar(MedidaTamanho medida) {
+    boolean atualizar(MedidaTamanho medida) {
         // código do CRUD com o BD
     }
 
     @Override
-    void deletar(int id) {
+    boolean deletar(int id) {
         // código do CRUD com o BD
     }
 

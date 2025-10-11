@@ -6,9 +6,9 @@ package dao;
 
 public interface ClienteDAO {
     /*
-    void inserir(Cliente cliente);
-    void atualizar(Cliente cliente);
-    void deletar(int id);
+    Cliente inserir(Cliente cliente);
+    boolean atualizar(Cliente cliente);
+    boolean deletar(int id);
     Cliente buscarPorId(int id);
     List<Cliente> listarTodos();
 

@@ -4,17 +4,17 @@ package service;
 public class UsuarioService {
     /*
 
-    void inserirUsuario(Usuario usuario) {
+    Usuario inserirUsuario(Usuario usuario) {
         // código do CRUD com o BD
     }
 
 
-    void atualizar(Usuario usuario) {
+    boolean atualizar(Usuario usuario) {
         // código do CRUD com o BD
     }
 
 
-    void deletar(int id) {
+    boolean deletar(int id) {
         // código do CRUD com o BD
     }
 

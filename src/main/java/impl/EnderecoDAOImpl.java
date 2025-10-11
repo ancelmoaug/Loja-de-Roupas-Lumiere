@@ -5,17 +5,17 @@ import dao.EnderecoDAO;
 public class EnderecoDAOImpl implements EnderecoDAO {
     /*
     @Override
-    void salvar(Endereco endereco) {
+    Endereco inserir(Endereco endereco) {
         // código do CRUD com o BD
     }
 
     @Override
-    void atualizar(Endereco endereco) {
+    boolean atualizar(Endereco endereco) {
         // código do CRUD com o BD
     }
 
     @Override
-    void deletar(int id) {
+    boolean deletar(int id) {
         // código do CRUD com o BD
     }
 

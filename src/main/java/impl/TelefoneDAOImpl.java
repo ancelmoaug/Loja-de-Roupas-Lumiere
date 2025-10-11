@@ -5,17 +5,17 @@ import dao.TelefoneDAO;
 public class TelefoneDAOImpl implements TelefoneDAO {
     /*
     @Override
-    void salvar(Telefone telefone) {
+    Telefone inserir(Telefone telefone) {
         // código do CRUD com o BD
     }
 
     @Override
-    void atualizar(Telefone telefone) {
+    boolean atualizar(Telefone telefone) {
         // código do CRUD com o BD
     }
 
     @Override
-    void deletar(int id) {
+    boolean deletar(int id) {
         // código do CRUD com o BD
     }
 

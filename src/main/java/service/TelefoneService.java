@@ -4,15 +4,15 @@ package service;
 public class TelefoneService {
     /*
 
-    void inserirTelefone(Telefone telefone) {
+    Telefone inserirTelefone(Telefone telefone) {
         // código do CRUD com o BD
     }
 
-    void atualizar(Telefone telefone) {
+    boolean atualizar(Telefone telefone) {
         // código do CRUD com o BD
     }
 
-    void deletar(int id) {
+    boolean deletar(int id) {
         // código do CRUD com o BD
     }
 

@@ -3,15 +3,15 @@ package controller;
 
 public class DadosBancariosController {
     /*
-    void inserirDadosBancarios(DadosBancarios dados) {
+    DadosBancarios inserirDadosBancarios(String codigoAgenciaBanco, String numeroContaBanco, String codigoBanco) {
         // código do CRUD com o BD
     }
 
-    void atualizar(DadosBancarios dados) {
+    boolean atualizar(int is, String codigoAgenciaBanco, String numeroContaBanco, String codigoBanco) {
         // código do CRUD com o BD
     }
 
-    void deletar(int id) {
+    boolean deletar(int id) {
         // código do CRUD com o BD
     }
 

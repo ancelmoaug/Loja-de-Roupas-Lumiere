@@ -4,15 +4,15 @@ package service;
 public class FuncionarioService {
     /*
     
-    void salvar(Funcionario funcionario) {
+    Funcionario inserirFuncionario(Funcionario funcionario) {
         // código do CRUD com o BD
     }
 
-    void atualizar(Funcionario funcionario) {
+    boolean atualizar(Funcionario funcionario) {
         // código do CRUD com o BD
     }
 
-    void deletar(int id) {
+    boolean deletar(int id) {
         // código do CRUD com o BD
     }
 

@@ -4,17 +4,17 @@ package service;
 public class VariacaoProdutoService {
     /* 
 
-    void inserirVariacaoProduto(VariacaoProduto variacao) {
+    VariacaoProduto inserirVariacaoProduto(VariacaoProduto variacao) {
         // código do CRUD com o BD
     }
 
 
-    void atualizar(VariacaoProduto variacao) {
+    boolean atualizar(VariacaoProduto variacao) {
         // código do CRUD com o BD
     }
 
 
-    void deletar(int id) {
+    boolean deletar(int id) {
         // código do CRUD com o BD
     }
 

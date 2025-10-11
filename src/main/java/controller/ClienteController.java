@@ -4,16 +4,24 @@ package controller;
 public class ClienteController {
     /*
 
-    void inserirCliente(Cliente cliente){
-
-    }
-
-    void atualizar(Cliente cliente) {
+    Cliente inserirCliente(String nome, String sobrenome, int anoNascimento, int mesNascimento,
+                         int diaNascimento, String senha, String cpf, String email, 
+                         String codigoAgenciaBanco, String numeroContaBanco, String codigoBanco,
+                         String estado, String municipio, String cep, String bairro, String rua,
+                         String numeroEndereco, String complementoEndereco, String telefone){
         // código do CRUD com o BD
     }
 
+    boolean atualizar(int id, String nome, String sobrenome, int anoNascimento, int mesNascimento,
+                         int diaNascimento, String senha, String cpf, String email, 
+                         String codigoAgenciaBanco, String numeroContaBanco, String codigoBanco,
+                         String estado, String municipio, String cep, String bairro, String rua,
+                         String numeroEndereco, String complementoEndereco, String telefone) {
+        // código
+    }
 
-    void deletar(int id) {
+
+    boolean deletar(int id) {
         // código do CRUD com o BD
     }
 
@@ -45,12 +53,12 @@ public class ClienteController {
     }
 
 
-    Carrinho buscarCarrinhoDoCliente(int idCliente) {
+    Carrinho buscarCarrinhoDoCliente(int idCliente) {  //deixa esse metodo comentado
         // código do CRUD com o BD
     }
 
 
-    List<Pedido> listarPedidosDoCliente(int idCliente) {
+    List<Pedido> listarPedidosDoCliente(int idCliente) { //deixa esse metodo comentado
         // código do CRUD com o BD
     }
 

@@ -2,9 +2,9 @@ package dao;
 
 public interface EnderecoDAO {
     /*
-    void salvar(Endereco endereco);
-    void atualizar(Endereco endereco);
-    void deletar(int id);
+    Endereco inserir(Endereco endereco);
+    boolean atualizar(Endereco endereco);
+    boolean deletar(int id);
     Endereco buscarPorId(int id);
     List<Endereco> listarTodos();
 

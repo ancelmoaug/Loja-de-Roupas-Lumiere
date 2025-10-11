@@ -4,15 +4,15 @@ package service;
 public class ProdutoBaseService {
     /*
 
-    void inserirProdutoBase(ProdutoBase produto) {
+    ProdutoBase inserirProdutoBase(ProdutoBase produto) {
         // código do CRUD com o BD
     }
 
-    void atualizar(ProdutoBase produto) {
+    boolean atualizar(ProdutoBase produto) {
         // código do CRUD com o BD
     }
 
-    void deletar(int id) {
+    boolean deletar(int id) {
         // código do CRUD com o BD
     }
 
