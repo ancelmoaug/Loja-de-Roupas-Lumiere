@@ -6,7 +6,7 @@ import dao.VariacaoProdutoDAO;
 import model.VariacaoProduto;
 
 public class VariacaoProdutoDAOImpl implements VariacaoProdutoDAO {
-    
+    /*
     @Override
     VariacaoProduto inserir(VariacaoProduto variacao) {
         
@@ -54,5 +54,5 @@ public class VariacaoProdutoDAOImpl implements VariacaoProdutoDAO {
         // código do CRUD com o BD
     }
         
-    
+    */
 }

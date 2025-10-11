@@ -5,7 +5,7 @@ import java.util.List;
 import model.VariacaoProduto;
 
 public class VariacaoProdutoService {
-    
+    /*
 
     VariacaoProduto inserirVariacaoProduto(VariacaoProduto variacao) {
         // código do CRUD com o BD
@@ -53,5 +53,5 @@ public class VariacaoProdutoService {
         // código do CRUD com o BD
     }
         
-    
+    */
 }
