@@ -1,55 +1,58 @@
 package impl;
 
+import java.util.List;
+
 import dao.VariacaoProdutoDAO;
+import model.VariacaoProduto;
 
 public class VariacaoProdutoDAOImpl implements VariacaoProdutoDAO {
-    /* 
+    
     @Override
     VariacaoProduto inserir(VariacaoProduto variacao) {
+        
+    }
+
+    @Override
+    public boolean atualizar(VariacaoProduto variacao) {
         // código do CRUD com o BD
     }
 
     @Override
-    boolean atualizar(VariacaoProduto variacao) {
+    public boolean deletar(int id) {
         // código do CRUD com o BD
     }
 
     @Override
-    boolean deletar(int id) {
+    public VariacaoProduto buscarPorId(int id) {
         // código do CRUD com o BD
     }
 
     @Override
-    VariacaoProduto buscarPorId(int id) {
-        // código do CRUD com o BD
-    }
-
-    @Override
-    List<VariacaoProduto> listarTodas() {
+    public List<VariacaoProduto> listarTodas() {
         // código do CRUD com o BD
     }
 
 
     // Específicos
     @Override
-    List<VariacaoProduto> buscarPorProdutoBase(int idProdutoBase) {
+    public List<VariacaoProduto> buscarPorProdutoBase(int idProdutoBase) {
         // código do CRUD com o BD
     }
 
     @Override
-    List<VariacaoProduto> buscarPorCor(String cor) {
+    public List<VariacaoProduto> buscarPorCor(String cor) {
+        
+    }
+
+    @Override
+    public List<VariacaoProduto> buscarPorTamanho(String tamanho) {
         // código do CRUD com o BD
     }
 
     @Override
-    List<VariacaoProduto> buscarPorTamanho(String tamanho) {
-        // código do CRUD com o BD
-    }
-
-    @Override
-    List<VariacaoProduto> buscarPorDisponibilidade(boolean emEstoque) {
+    public List<VariacaoProduto> buscarPorDisponibilidade(boolean emEstoque) {
         // código do CRUD com o BD
     }
         
-    */
+    
 }
