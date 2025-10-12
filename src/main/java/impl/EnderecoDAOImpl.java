@@ -25,7 +25,7 @@ public class EnderecoDAOImpl implements EnderecoDAO {
     }
 
     @Override
-    List<Endereco> listarTodos() {
+    public Endereco buscarPorUsuario(Usuario usuario) {
         // código do CRUD com o BD
     }
 

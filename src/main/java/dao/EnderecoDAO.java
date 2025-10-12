@@ -6,7 +6,7 @@ public interface EnderecoDAO {
     boolean atualizar(Endereco endereco);
     boolean deletar(int id);
     Endereco buscarPorId(int id);
-    List<Endereco> listarTodos();
+    Endereco buscarPorUsuario(Usuario usuario);
 
     // Específicos
     List<Endereco> buscarPorCidade(String cidade);

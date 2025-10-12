@@ -3,9 +3,9 @@ package controller;
 
 public class ClienteController {
     /*
-
+    // criar model de Endereco, Telefone, DadosBancarios, Usuario e Cliente
     Cliente inserirCliente(String nome, String sobrenome, int anoNascimento, int mesNascimento,
-                         int diaNascimento, String senha, String cpf, String email, 
+                         int dataNascimento, String senha, String cpf, String email, 
                          String codigoAgenciaBanco, String numeroContaBanco, String codigoBanco,
                          String estado, String municipio, String cep, String bairro, String rua,
                          String numeroEndereco, String complementoEndereco, String telefone){
@@ -13,7 +13,7 @@ public class ClienteController {
     }
 
     boolean atualizar(int id, String nome, String sobrenome, int anoNascimento, int mesNascimento,
-                         int diaNascimento, String senha, String cpf, String email, 
+                         int dataNascimento, String senha, String cpf, String email, 
                          String codigoAgenciaBanco, String numeroContaBanco, String codigoBanco,
                          String estado, String municipio, String cep, String bairro, String rua,
                          String numeroEndereco, String complementoEndereco, String telefone) {

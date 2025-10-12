@@ -22,7 +22,7 @@ public class EnderecoController {
         // código do CRUD com o BD
     }
 
-    List<Endereco> listarTodos() {
+    public Endereco buscarPorUsuario(Usuario usuario) {
         // código do CRUD com o BD
     }
 

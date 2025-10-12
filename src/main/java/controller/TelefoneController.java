@@ -3,6 +3,7 @@ package controller;
 
 public class TelefoneController {
     /*
+    
     Telefone inserirTelefone(String telefone) {
         // código do CRUD com o BD
     }

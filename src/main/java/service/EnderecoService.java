@@ -4,37 +4,38 @@ package service;
 public class EnderecoService {
     /*
 
-    Endereco inserirEndereco(Endereco endereco) {
+    public Endereco inserirEndereco(Endereco endereco) {
         // código do CRUD com o BD
     }
 
-    boolean atualizar(Endereco endereco) {
+    public boolean atualizar(Endereco endereco) {
         // código do CRUD com o BD
     }
 
-    boolean deletarEndereco(int id) {
+    public boolean deletarEndereco(int id) {
         // código do CRUD com o BD
     }
 
-    Endereco buscarPorId(int id) {
+    public Endereco buscarPorId(int id) {
         // código do CRUD com o BD
     }
 
-    List<Endereco> listarTodos() {
+    public Endereco buscarPorUsuario(Usuario usuario) {
         // código do CRUD com o BD
     }
+
 
 
     // Específicos
-    List<Endereco> buscarPorCidade(String cidade) {
+    public List<Endereco> buscarPorCidade(String cidade) {
         // código do CRUD com o BD
     }
 
-    List<Endereco> buscarPorEstado(String estado) {
+    public List<Endereco> buscarPorEstado(String estado) {
         // código do CRUD com o BD
     }
 
-    List<Endereco> buscarPorCep(String cep) {
+    public List<Endereco> buscarPorCep(String cep) {
         // código do CRUD com o BD
     }
 

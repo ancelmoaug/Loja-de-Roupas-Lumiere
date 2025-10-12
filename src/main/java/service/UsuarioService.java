@@ -4,7 +4,7 @@ package service;
 public class UsuarioService {
     /*
 
-    Usuario inserirUsuario(Usuario usuario) {
+    Usuario inserirUsuario(Usuario usuario, id) {
         // código do CRUD com o BD
     }
 

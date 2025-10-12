@@ -5,7 +5,7 @@ import dao.TamanhoDAO;
 public class TamanhoDAOImpl implements TamanhoDAO {
     /*
     @Override
-    String buscarPorId(int id) {
+    Tamanho buscarPorId(int id) {
     // código 
     }
     @Override

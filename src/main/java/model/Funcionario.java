@@ -12,13 +12,13 @@ public class Funcionario extends Usuario {
 
     public Funcionario(String nome, String sobrenome, LocalDate dataDeNascimento, String senha, String cpf,
                     String email, DadosBancarios dadosBancarios, Endereco endereco, Telefone telefone) {
-        super(nome, sobrenome, dataDeNascimento, senha, cpf, email, dadosBancarios, endereco, telefone);
+        super(nome, sobrenome, senha, dataDeNascimento, cpf, telefone, endereco, email, dadosBancarios);
     }
 
     public Funcionario(String nome, String sobrenome, LocalDate dataDeNascimento, String senha, String cpf,
                     String email, DadosBancarios dadosBancarios, Endereco endereco, Telefone telefone,
                     int id, String cargo, LocalDate dataAdmissao, double salario){
-        super(nome, sobrenome, dataDeNascimento, senha, cpf, email, dadosBancarios, endereco, telefone);
+        super(nome, sobrenome, senha, dataDeNascimento, cpf, telefone, endereco, email, dadosBancarios);
         this.id = id;
         this.cargo = cargo;
         this.dataAdmissao = dataAdmissao;
@@ -28,8 +28,15 @@ public class Funcionario extends Usuario {
     public Funcionario(int idUsuario, String nome, String sobrenome, LocalDate dataDeNascimento, String senha, String cpf,
                     String email, DadosBancarios dadosBancarios, Endereco endereco, Telefone telefone,
                     int id, String cargo, LocalDate dataAdmissao, double salario) {
-        super(idUsuario, nome, sobrenome, dataDeNascimento, senha, cpf, email, dadosBancarios, endereco, telefone);
+        super(id, nome, sobrenome, senha, dataDeNascimento, cpf, telefone, endereco, email, dadosBancarios);
         this.id = id;
+        this.cargo = cargo;
+        this.dataAdmissao = dataAdmissao;
+        this.salario = salario;
+    }
+
+    public Funcionario(Usuario usuario, String cargo, LocalDate dataAdmissao, double salario) {
+        super(usuario);
         this.cargo = cargo;
         this.dataAdmissao = dataAdmissao;
         this.salario = salario;
@@ -68,4 +75,11 @@ public class Funcionario extends Usuario {
     public void setSalario(double salario) {
         this.salario = salario;
     }
+
+    // retorna id do usuario
+    public int getIdUsuario() {
+
+        return super.getId();
+    }
+
 }

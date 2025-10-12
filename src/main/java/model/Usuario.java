@@ -13,10 +13,25 @@ public class Usuario {
     private Telefone telefone;
     private Endereco endereco;
     private String email;
+    private DadosBancarios dadosBancarios;
 
 
-    public Usuario(String nome, String sobrenome, LocalDate dataDeNascimento, String senha, String cpf,
-                    String email, DadosBancarios dadosBancarios, Endereco endereco, Telefone telefone) {
+    public Usuario(String nome, String sobrenome, String senha, LocalDate dataDeNascimento,  String cpf,
+                    Telefone telefone, Endereco endereco, String email, DadosBancarios dadosBancarios) {
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.senha = senha;
+        this.dataDeNascimento = dataDeNascimento;
+        this.cpf = cpf;
+        this.telefone = telefone;
+        this.endereco = endereco;
+        this.email = email;
+        this.dadosBancarios = dadosBancarios;
+    }
+
+    public Usuario(int id, String nome, String sobrenome, String senha, LocalDate dataDeNascimento,  String cpf,
+                    Telefone telefone, Endereco endereco, String email, DadosBancarios dadosBancarios) {
+        this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.senha = senha;
@@ -27,17 +42,29 @@ public class Usuario {
         this.email = email;
     }
 
-    public Usuario(int id, String nome, String sobrenome, LocalDate dataDeNascimento, String senha, String cpf,
-                    String email, DadosBancarios dadosBancarios, Endereco endereco, Telefone telefone) {
+    public Usuario(Usuario usuario) {
+        this.nome = usuario.nome;
+        this.sobrenome = usuario.sobrenome;
+        this.senha = usuario.senha;
+        this.dataDeNascimento = usuario.dataDeNascimento;
+        this.cpf = usuario.cpf;
+        this.telefone = usuario.telefone;
+        this.endereco = usuario.endereco;
+        this.email = usuario.email;
+        this.dadosBancarios = usuario.dadosBancarios;
+    }
+
+    public Usuario(int id, Usuario usuario) {
         this.id = id;
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.senha = senha;
-        this.dataDeNascimento = dataDeNascimento;
-        this.cpf = cpf;
-        this.telefone = telefone;
-        this.endereco = endereco;
-        this.email = email;
+        this.nome = usuario.nome;
+        this.sobrenome = usuario.sobrenome;
+        this.senha = usuario.senha;
+        this.dataDeNascimento = usuario.dataDeNascimento;
+        this.cpf = usuario.cpf;
+        this.telefone = usuario.telefone;
+        this.endereco = usuario.endereco;
+        this.email = usuario.email;
+        this.dadosBancarios = usuario.dadosBancarios;
     }
 
     public Usuario() {}
@@ -112,6 +139,14 @@ public class Usuario {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public DadosBancarios getDadosBancarios() {
+        return dadosBancarios;
+    }
+
+    public void setDadosBancarios(DadosBancarios dadosBancarios) {
+        this.dadosBancarios = dadosBancarios;
     }
     
 }

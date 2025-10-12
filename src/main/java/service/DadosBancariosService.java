@@ -5,33 +5,33 @@ import dao.DadosBancariosDAO;
 public class DadosBancariosService implements DadosBancariosDAO {
     /*
 
-    DadosBancarios inserirDadosBancarios(DadosBancarios dados) {
+    public DadosBancarios inserirDadosBancarios(DadosBancarios dados) {
         // código do CRUD com o BD
     }
 
-    boolean atualizar(DadosBancarios dados) {
+    public boolean atualizar(DadosBancarios dados) {
         // código do CRUD com o BD
     }
 
-    boolean deletar(int id) {
+    public boolean deletar(int id) {
         // código do CRUD com o BD
     }
 
-    DadosBancarios buscarPorId(int id) {
+    public DadosBancarios buscarPorId(int id) {
         // código do CRUD com o BD
     }
 
-    List<DadosBancarios> listarTodos() {
+    public List<DadosBancarios> listarTodos() {
         // código do CRUD com o BD
     }
 
 
     // Específicos
-    List<DadosBancarios> buscarPorCodigoBanco(String codigoBanco) {
+    public List<DadosBancarios> buscarPorCodigoBanco(String codigoBanco) {
         // código do CRUD com o BD
     }
 
-    DadosBancarios buscarPorNumeroConta(String numeroConta) {
+    public DadosBancarios buscarPorNumeroConta(String numeroConta) {
         // código do CRUD com o BD
     }
 

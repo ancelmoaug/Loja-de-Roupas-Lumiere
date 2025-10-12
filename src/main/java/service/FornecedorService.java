@@ -4,7 +4,7 @@ package service;
 public class FornecedorService {
     /*
 
-    Fornecedor inserirFornecedor(Fornecedor fornecedor) {
+    Fornecedor inserirFornecedor(Fornecedor fornecedor, ) {
         // código do CRUD com o BD
     }
 
