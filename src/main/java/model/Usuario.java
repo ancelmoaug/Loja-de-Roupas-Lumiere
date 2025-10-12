@@ -1,18 +1,24 @@
 package model;
 
+import java.time.LocalDate;
+
 public class Usuario {
+    
+    private int id;
     private String nome;
+    private String sobrenome;
     private String senha;
-    private String dataDeNascimento;
+    private LocalDate dataDeNascimento;
     private String cpf;
-    private String telefone;
-    private String endereco;
+    private Telefone telefone;
+    private Endereco endereco;
     private String email;
 
 
-    public Usuario(String nome, String senha, String dataDeNascimento, String cpf,
-                    String telefone, String endereco, String email) {
+    public Usuario(String nome, String sobrenome, LocalDate dataDeNascimento, String senha, String cpf,
+                    String email, DadosBancarios dadosBancarios, Endereco endereco, Telefone telefone) {
         this.nome = nome;
+        this.sobrenome = sobrenome;
         this.senha = senha;
         this.dataDeNascimento = dataDeNascimento;
         this.cpf = cpf;
@@ -21,12 +27,35 @@ public class Usuario {
         this.email = email;
     }
 
+    public Usuario(int id, String nome, String sobrenome, LocalDate dataDeNascimento, String senha, String cpf,
+                    String email, DadosBancarios dadosBancarios, Endereco endereco, Telefone telefone) {
+        this.id = id;
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.senha = senha;
+        this.dataDeNascimento = dataDeNascimento;
+        this.cpf = cpf;
+        this.telefone = telefone;
+        this.endereco = endereco;
+        this.email = email;
+    }
+
+    public Usuario() {}
+
     public String getNome() {
         return nome;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getSobrenome() {
+        return sobrenome;
+    }
+
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
     }
 
     public String getSenha() {
@@ -37,11 +66,11 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public String getDataDeNascimento() {
+    public LocalDate getDataDeNascimento() {
         return dataDeNascimento;
     }
 
-    public void setDataDeNascimento(String dataDeNascimento) {
+    public void setDataDeNascimento(LocalDate dataDeNascimento) {
         this.dataDeNascimento = dataDeNascimento;
     }
 
@@ -53,19 +82,19 @@ public class Usuario {
         this.cpf = cpf;
     }
 
-    public String getTelefone() {
+    public Telefone getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(String telefone) {
+    public void setTelefone(Telefone telefone) {
         this.telefone = telefone;
     }
 
-    public String getEndereco() {
+    public Endereco getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(String endereco) {
+    public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
 
@@ -75,6 +104,14 @@ public class Usuario {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
     
 }

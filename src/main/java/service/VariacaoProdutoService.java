@@ -1,57 +1,87 @@
 package service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import db.DB;
+import impl.VariacaoProdutoDAOImpl;
+import model.ProdutoBase;
+import model.Tamanho;
 import model.VariacaoProduto;
 
 public class VariacaoProdutoService {
-    /*
 
-    VariacaoProduto inserirVariacaoProduto(VariacaoProduto variacao) {
-        // código do CRUD com o BD
+    private VariacaoProdutoDAOImpl variacaoDAOImpl;
+
+    
+    public VariacaoProdutoService() {//Service instancia um DAOImpl mandando um DB.getConnection no construtor
+        variacaoDAOImpl = new VariacaoProdutoDAOImpl(DB.getConnection());
+    }
+
+    public VariacaoProdutoDAOImpl getVariacaoDAOImpl() {
+        return variacaoDAOImpl;
+    }
+
+    public VariacaoProduto inserirVariacaoProduto(VariacaoProduto variacao, int idProdutoBase, int idTamanho) {
+        //verificar se tem o produto base e o tamanho
+        try {
+            ProdutoBaseService produtoBaseService = new ProdutoBaseService();
+            ProdutoBase produtoBase = produtoBaseService.buscarPorId(idProdutoBase);
+
+            TamanhoService tamanhoService = new TamanhoService();
+            Tamanho tamanho = tamanhoService.buscarPorId();
+
+            variacao.setProdutoBase(produtoBase);
+            variacao.setTamanho(tamanho);
+
+            return variacaoDAOImpl.inserir(variacao);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
 
-    boolean atualizar(VariacaoProduto variacao) {
-        // código do CRUD com o BD
+    public boolean atualizar(VariacaoProduto variacao, int idProdutoBase, int idTamanho) {
+        //verificar se tem o produto base e o tamanho
+        try {
+            ProdutoBaseService produtoBaseService = new ProdutoBaseService();
+            ProdutoBase produtoBase = produtoBaseService.buscarPorId(idProdutoBase);
+
+            TamanhoService tamanhoService = new TamanhoService();
+            Tamanho tamanho = tamanhoService.buscarPorId();
+
+            variacao.setProdutoBase(produtoBase);
+            variacao.setTamanho(tamanho);
+
+            return variacaoDAOImpl.atualizar(variacao);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
 
-    boolean deletar(int id) {
-        // código do CRUD com o BD
+    public boolean deletar(int id) {
+        try {
+            if(!(variacaoDAOImpl.buscarPorId(id) instanceof VariacaoProduto)) { //verifica se tem esse id
+                return false; //se não tiver, retorna false, operação n foi sucesso
+            }
+            variacaoDAOImpl.deletar(id); //se tiver, ele deleta e retorna true
+            return true;
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
 
-    VariacaoProduto buscarPorId(int id) {
-        // código do CRUD com o BD
-    }
-
-
-    public List<VariacaoProduto> listarTodas() {
-        // código do CRUD com o BD
+    public VariacaoProduto buscarPorId(int id) {
+        return variacaoDAOImpl.buscarPorId(id);
     }
 
 
     // Específicos
-
     public List<VariacaoProduto> buscarPorProdutoBase(int idProdutoBase) {
-        // código do CRUD com o BD
+        List<VariacaoProduto> variacoesProdutos = variacaoDAOImpl.buscarPorProdutoBase(idProdutoBase);
+        return variacoesProdutos;
     }
 
-
-    public List<VariacaoProduto> buscarPorCor(String cor) {
-        // código do CRUD com o BD
-    }
-
-
-    public List<VariacaoProduto> buscarPorTamanho(String tamanho) {
-        // código do CRUD com o BD
-    }
-
-
-    public List<VariacaoProduto> buscarPorDisponibilidade(boolean emEstoque) {
-        // código do CRUD com o BD
-    }
-        
-    */
 }

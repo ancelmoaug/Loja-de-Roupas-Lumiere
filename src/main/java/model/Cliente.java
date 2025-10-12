@@ -1,61 +1,39 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
 
 public class Cliente extends Usuario {
+    
+    private int id;
 
-    private static List<Cliente> clientes;
 
- 
-    public Cliente(String nome, String senha, String dataNascimento,
-                       String cpf, String telefone, String endereco,
-                       String email, String cargo) {
-        super(nome, senha, dataNascimento, cpf, telefone, endereco, email);
-        clientes = new ArrayList<Cliente>();
+    public Cliente(String nome, String sobrenome, LocalDate dataDeNascimento, String senha, String cpf,
+                    String email, DadosBancarios dadosBancarios, Endereco endereco, Telefone telefone) {
+        super(nome, sobrenome, dataDeNascimento, senha, cpf, email, dadosBancarios, endereco, telefone);
     }
 
-
-    public static void adicionarCliente(Cliente cliente) {
-        clientes.add(cliente);
+    public Cliente(String nome, String sobrenome, LocalDate dataDeNascimento, String senha, String cpf,
+                    String email, DadosBancarios dadosBancarios, Endereco endereco, Telefone telefone,
+                    int id) {
+        super(nome, sobrenome, dataDeNascimento, senha, cpf, email, dadosBancarios, endereco, telefone);
+        this.id = id;
     }
 
-    public static void atualizarCliente(String cpf, Cliente novoCliente) {
-        for (int i = 0; i < clientes.size(); i++) {
-            if (clientes.get(i).getCpf().equals(cpf)) {
-                clientes.set(i, novoCliente);
-                break;
-            }
-        }
+    public Cliente(int idUsuario, String nome, String sobrenome, LocalDate dataDeNascimento, String senha, String cpf,
+                    String email, DadosBancarios dadosBancarios, Endereco endereco, Telefone telefone,
+                    int id) {
+        super(idUsuario, nome, sobrenome, dataDeNascimento, senha, cpf, email, dadosBancarios, endereco, telefone);
+        this.id = id;
     }
 
-    public static void removerCliente(String cpf) {
-        clientes.removeIf(cliente -> cliente.getCpf().equals(cpf));
+    public Cliente() {super();}
+
+    public int getId() {
+        return id;
     }
 
-    public static void listarClientes() {
-        for (Cliente cliente : clientes) {
-            System.out.println(cliente);
-        }
-    }
-
-    public static Cliente pesquisarCliente(String cpf) {
-        for (Cliente cliente : clientes) {
-            if (cliente.getCpf().equals(cpf)) {
-                return cliente;
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public String toString() {
-        return "Cliente{" +
-                "CPF='" + getCpf() + '\'' +
-                ", dataNascimento=" + getDataDeNascimento() +
-                ", contato='" + getTelefone() + '\'' +
-                ", endereco='" + getEndereco() + '\'' +
-                '}';
+    public void setId(int id) {
+        this.id = id;
     }
 
   

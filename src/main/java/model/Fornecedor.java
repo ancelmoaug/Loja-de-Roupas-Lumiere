@@ -1,21 +1,23 @@
 package model;
 
-//import java.util.ArrayList;
+import java.util.List;
+
+import java.util.ArrayList;
 
 public class Fornecedor {
-    /* 
+    
     private String razaoSocial;
     private String nomeComercial;
     private String cnpj;
-    private String endereco;
-    private String telefoneComercial;
+    private Endereco endereco;
+    private Telefone telefoneComercial;
     private String emailComercial;
 
-    private List<Produto> produtosFornecidos;
+    private List<ProdutoBase> produtosFornecidos;
 
 
-    public Fornecedor(String razaoSocial, String nomeComercial, String cnpj, String endereco, 
-                      String telefoneComercial, String emailComercial) {
+    public Fornecedor(String razaoSocial, String nomeComercial, String cnpj, Endereco endereco, 
+                      Telefone telefoneComercial, String emailComercial) {
         this.razaoSocial = razaoSocial;
         this.nomeComercial = nomeComercial;
         this.cnpj = cnpj;
@@ -23,7 +25,7 @@ public class Fornecedor {
         this.telefoneComercial = telefoneComercial;
         this.emailComercial = emailComercial;
 
-        //this.produtosFornecidos = new ArrayList<Produto>();
+        this.produtosFornecidos = new ArrayList<ProdutoBase>();
     }
 
     public String getRazaoSocial() {
@@ -50,19 +52,19 @@ public class Fornecedor {
         this.cnpj = cnpj;
     }
 
-    public String getEndereco() {
+    public Endereco getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(String endereco) {
+    public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
 
-    public String getTelefoneComercial() {
+    public Telefone getTelefoneComercial() {
         return telefoneComercial;
     }
 
-    public void setTelefoneComercial(String telefoneComercial) {
+    public void setTelefoneComercial(Telefone telefoneComercial) {
         this.telefoneComercial = telefoneComercial;
     }
 
@@ -74,9 +76,8 @@ public class Fornecedor {
         this.emailComercial = emailComercial;
     }
 
-    public void adicionarProdutoFornecido(Produto produto) {
+    public void adicionarProdutoFornecido(ProdutoBase produto) {
         produtosFornecidos.add(produto);
     }
 
-    */
 }

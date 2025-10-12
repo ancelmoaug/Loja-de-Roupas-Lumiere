@@ -1,47 +1,43 @@
 package controller;
 
+import java.util.List;
+
+import model.VariacaoProduto;
+import service.VariacaoProdutoService;
 
 public class VariacaoProdutoController {
-    /* 
-    VariacaoProduto inserirVariacaoProduto(int idProdutoBase, String nomeCor, String hexadecimalCor,
+
+    private VariacaoProdutoService variacaoProdutoService;
+
+    
+    public VariacaoProdutoController() {
+        variacaoProdutoService = new VariacaoProdutoService();
+    }
+     
+    public VariacaoProduto inserirVariacaoProduto(int idProdutoBase, String nomeCor, String hexadecimalCor,
                                             int idTamanho, int quantidadeEmEstoque, String urlImagem) {
-        // código do CRUD com o BD
+        VariacaoProduto variacao = new VariacaoProduto(nomeCor, hexadecimalCor, null, null, quantidadeEmEstoque, urlImagem);
+        return variacaoProdutoService.inserirVariacaoProduto(variacao, idProdutoBase, idTamanho);
     }
 
-    boolean atualizar(int id, int idProdutoBase, String nomeCor, String hexadecimalCor,
+    public boolean atualizar(int id, int idProdutoBase, String nomeCor, String hexadecimalCor,
                         int idTamanho, int quantidadeEmEstoque, String urlImagem) {
-        // código do CRUD com o BD
+        VariacaoProduto variacao = new VariacaoProduto(id, nomeCor, hexadecimalCor, null, null, quantidadeEmEstoque, urlImagem);
+        return variacaoProdutoService.atualizar(variacao, idProdutoBase, idTamanho);
     }
 
-    boolean deletar(int id) {
-        // código do CRUD com o BD
+    public boolean deletar(int id) {
+        return variacaoProdutoService.deletar(id);
     }
 
-    VariacaoProduto buscarPorId(int id) {
-        // código do CRUD com o BD
-    }
-
-    List<VariacaoProduto> listarTodas() {
-        // código do CRUD com o BD
+    public VariacaoProduto buscarPorId(int id) {
+        return variacaoProdutoService.buscarPorId(id);
     }
 
 
     // Específicos
-    List<VariacaoProduto> buscarPorProdutoBase(int idProdutoBase) {
-        // código do CRUD com o BD
-    }
-
-    List<VariacaoProduto> buscarPorCor(String cor) {
-        // código do CRUD com o BD
-    }
-
-    List<VariacaoProduto> buscarPorTamanho(String tamanho) {
-        // código do CRUD com o BD
-    }
-
-    List<VariacaoProduto> buscarPorDisponibilidade(boolean emEstoque) {
-        // código do CRUD com o BD
+    public List<VariacaoProduto> buscarPorProdutoBase(int idProdutoBase) {
+        return variacaoProdutoService.buscarPorProdutoBase(idProdutoBase);
     }
         
-    */
 }

@@ -1,23 +1,42 @@
 package model;
 
 public class VariacaoProduto {
+    
     private int id;
     private String nomeCor;
     private String hexaDecimalCor;
     private int quantidadeEmEstoque;
+    private String urlImagem;
+
 
     private ProdutoBase produtoBase;
     private Tamanho tamanho;
+
 
     public VariacaoProduto(String nomeCor, String hexadecimalCor, ProdutoBase produtoBase,
                             Tamanho tamanho, int quantidadeEmEstoque, String urlImagem) {
         this.nomeCor = nomeCor;
         this.hexaDecimalCor = hexadecimalCor;
         this.quantidadeEmEstoque = quantidadeEmEstoque;
+        this.urlImagem = urlImagem;
 
         this.tamanho = tamanho;
         this.produtoBase = produtoBase;
     }
+
+    public VariacaoProduto(int id, String nomeCor, String hexadecimalCor, ProdutoBase produtoBase,
+                            Tamanho tamanho, int quantidadeEmEstoque, String urlImagem) {
+        this.id = id;
+        this.nomeCor = nomeCor;
+        this.hexaDecimalCor = hexadecimalCor;
+        this.quantidadeEmEstoque = quantidadeEmEstoque;
+        this.urlImagem = urlImagem;
+
+        this.tamanho = tamanho;
+        this.produtoBase = produtoBase;
+    }
+
+    public VariacaoProduto() {}
 
     public int getId() {
         return id;
@@ -65,6 +84,14 @@ public class VariacaoProduto {
 
     public void setTamanho(Tamanho tamanho) {
         this.tamanho = tamanho;
+    }
+    
+    public String getUrlImagem() {
+        return urlImagem;
+    }
+
+    public void setUrlImagem(String urlImagem) {
+        this.urlImagem = urlImagem;
     }
 
 }
