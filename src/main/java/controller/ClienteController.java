@@ -3,6 +3,12 @@ package controller;
 
 public class ClienteController {
     /* 
+    private ClienteService clienteService;
+
+    public ClienteController() {
+        cleinteService = new ClienteService();
+    }
+
     // criar model de Endereco, Telefone, DadosBancarios, Usuario e Cliente
     Cliente inserirCliente(String nome, String sobrenome, int anoNascimento, int mesNascimento,
                          int dataNascimento, String senha, String cpf, String email, 

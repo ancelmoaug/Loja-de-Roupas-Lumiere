@@ -3,7 +3,13 @@ package service;
 
 public class MedidaTamanhoService {
     /*
+    private MedidaTamanhoDAOImpl medidaTamanhoDAOImpl;
 
+    public MedidaTamanhoService() {
+        medidaTamanhoDAOImpl = new MedidaTamanhoDAOImpl(DB.getConnection());
+    } 
+
+    
     MedidaTamanho inserirMedidaTamanho(MedidaTamanho medida) {
         // código do CRUD com o BD
     }

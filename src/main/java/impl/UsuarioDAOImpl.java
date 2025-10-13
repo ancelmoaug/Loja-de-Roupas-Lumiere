@@ -4,6 +4,13 @@ import dao.UsuarioDAO;
 
 public class UsuarioDAOImpl implements UsuarioDAO {
     /*
+    private Connection conn;
+
+
+    public UsuarioDAOImpl(Connection conn){
+        this.conn = conn;
+    }
+
     @Override
     Usuario inserir(Usuario usuario) {
         // código do CRUD com o BD

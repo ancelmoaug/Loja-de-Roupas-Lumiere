@@ -3,7 +3,13 @@ package service;
 
 public class EnderecoService {
     /*
+    private EnderecoDAOImpl enderecoDAOImpl;
 
+    public EnderecoService() {
+        enderecoDAOImpl = new EnderecoDAOImpl(DB.getConnection());
+    } 
+
+    
     public Endereco inserirEndereco(Endereco endereco) {
         // código do CRUD com o BD
     }

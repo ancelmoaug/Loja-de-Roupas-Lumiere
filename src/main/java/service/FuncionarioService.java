@@ -3,7 +3,7 @@ package service;
 import java.util.List;
 
 import db.DB;
-import impl.FuncionarioDAOImpl;-
+import impl.FuncionarioDAOImpl;
 import model.Funcionario;
 
 public class FuncionarioService {

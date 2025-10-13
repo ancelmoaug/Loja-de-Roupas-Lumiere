@@ -8,7 +8,6 @@ public class VariacaoProduto {
     private int quantidadeEmEstoque;
     private String urlImagem;
 
-
     private ProdutoBase produtoBase;
     private Tamanho tamanho;
 

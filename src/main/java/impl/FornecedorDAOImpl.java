@@ -4,6 +4,13 @@ import dao.FornecedorDAO;
 
 public class FornecedorDAOImpl implements FornecedorDAO {
     /*
+    private Connection conn;
+
+
+    public FornecedorDAOImpl(Connection conn){
+        this.conn = conn;
+    }
+
     @Override
     Fornecedor inserir(Fornecedor fornecedor) {
         // código do CRUD com o BD

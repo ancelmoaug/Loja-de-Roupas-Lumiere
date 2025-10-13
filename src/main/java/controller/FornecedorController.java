@@ -3,6 +3,13 @@ package controller;
 
 public class FornecedorController {
     /*
+    private FornecedorService fornecedorService;
+
+    public FornecedorController() {
+        fornecedorService = new FornecedorService();
+    } 
+
+    
     Fornecedor inserirFornecedor(String razaoSocial, String nomeComercial, String cnpj, 
                                 String estado, String municipio, String cep, String bairro, String rua,
                                 String numero, String complemento,

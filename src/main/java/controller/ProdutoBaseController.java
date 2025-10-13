@@ -4,6 +4,14 @@ package controller;
 public class ProdutoBaseController {
 
     /*
+    private ProdutoBaseService produtoBaseService;
+
+    
+    public ProdutoBaseController() {
+        produtoBaseService = new ProdutoBaseService();
+    } 
+
+    
     ProdutoBase inserirProdutoBase(String nome, String descricao, double precoBase, String categoria
                                     int idFornecedor) {
         // código do CRUD com o BD

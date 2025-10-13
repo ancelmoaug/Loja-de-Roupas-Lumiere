@@ -4,6 +4,13 @@ import dao.MedidaTamanhoDAO;
 
 public class MedidaTamanhoDAOImpl implements MedidaTamanhoDAO {
     /*
+    private Connection conn;
+
+
+    public MedidaTamanhoDAOImpl(Connection conn){
+        this.conn = conn;
+    }
+
     @Override
     MedidaTamanho inserir(MedidaTamanho medida) {
         // código do CRUD com o BD

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class Fornecedor {
     
+    private int id;
     private String razaoSocial;
     private String nomeComercial;
     private String cnpj;
@@ -27,6 +28,21 @@ public class Fornecedor {
 
         this.produtosFornecidos = new ArrayList<ProdutoBase>();
     }
+
+    public Fornecedor(int id, String razaoSocial, String nomeComercial, String cnpj, Endereco endereco, 
+                      Telefone telefoneComercial, String emailComercial) {
+        this.id = id;
+        this.razaoSocial = razaoSocial;
+        this.nomeComercial = nomeComercial;
+        this.cnpj = cnpj;
+        this.endereco = endereco;
+        this.telefoneComercial = telefoneComercial;
+        this.emailComercial = emailComercial;
+
+        this.produtosFornecidos = new ArrayList<ProdutoBase>();
+    }
+
+    public Fornecedor() {}
 
     public String getRazaoSocial() {
         return razaoSocial;

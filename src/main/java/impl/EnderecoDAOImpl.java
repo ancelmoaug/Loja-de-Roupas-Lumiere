@@ -4,6 +4,13 @@ import dao.EnderecoDAO;
 
 public class EnderecoDAOImpl implements EnderecoDAO {
     /*
+    private Connection conn;
+
+
+    public EnderecoDAOImpl(Connection conn){
+        this.conn = conn;
+    }
+
     @Override
     Endereco inserir(Endereco endereco) {
         // código do CRUD com o BD

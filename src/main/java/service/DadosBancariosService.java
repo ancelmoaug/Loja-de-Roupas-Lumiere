@@ -4,7 +4,13 @@ import dao.DadosBancariosDAO;
 
 public class DadosBancariosService implements DadosBancariosDAO {
     /*
+    private DadosBancariosDAOImpl dadosBancariosDAOImpl;
 
+    public DadosBancariosService() {
+        dadosBancariosDAOImpl = new DadosBancariosDAOImpl(DB.getConnection());
+    } 
+
+    
     public DadosBancarios inserirDadosBancarios(DadosBancarios dados) {
         // código do CRUD com o BD
     }

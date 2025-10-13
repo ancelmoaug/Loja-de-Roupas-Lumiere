@@ -3,6 +3,13 @@ package service;
 
 public class ClienteService {
     /*
+
+    private ClienteDAOImpl clienteDAOImpl;
+
+    public ClienteService() {
+        clienteDAOImpl = new ClienteDAOImpl(DB.getConnection());
+    } 
+
     // esse metodo deve chamar a funcao inserirUsuario de UsuarioService
     public Cliente inserirCliente(Cliente cliente){ 
 

@@ -4,6 +4,13 @@ import dao.ClienteDAO;
 
 public class ClienteDAOimpl implements ClienteDAO {
     /*
+    private Connection conn;
+
+
+    public ClienteDAOImpl(Connection conn){
+        this.conn = conn;
+    }
+
     @Override
     Cliente inserir(Cliente cliente){
 

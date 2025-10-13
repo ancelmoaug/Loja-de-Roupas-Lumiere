@@ -3,8 +3,14 @@ package impl;
 import dao.ProdutoBaseDAO;
 
 public class ProdutoBaseDAOImpl implements ProdutoBaseDAO {
-
     /*
+    private Connection conn;
+
+
+    public ProdutoBaseDAOImpl(Connection conn){
+        this.conn = conn;
+    }
+
     @Override
     ProdutoBase inserir(ProdutoBase produto) {
         // código do CRUD com o BD

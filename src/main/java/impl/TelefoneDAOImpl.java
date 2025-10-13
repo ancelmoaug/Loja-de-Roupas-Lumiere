@@ -4,6 +4,13 @@ import dao.TelefoneDAO;
 
 public class TelefoneDAOImpl implements TelefoneDAO {
     /*
+    private Connection conn;
+
+
+    public TelefoneDAOImpl(Connection conn){
+        this.conn = conn;
+    }
+
     @Override
     Telefone inserir(Telefone telefone) {
         // código do CRUD com o BD

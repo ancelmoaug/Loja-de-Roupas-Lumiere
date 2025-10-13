@@ -3,7 +3,13 @@ package service;
 
 public class TelefoneService {
     /*
+    private TelefoneDAOImpl telefoneDAOImpl;
 
+    public TelefoneService() {
+        telefoneDAOImpl = new TelefoneDAOImpl(DB.getConnection());
+    } 
+
+    
     Telefone inserirTelefone(Telefone telefone) {
         // código do CRUD com o BD
     }

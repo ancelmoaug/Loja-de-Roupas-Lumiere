@@ -4,6 +4,13 @@ import dao.DadosBancariosDAO;
 
 public class DadosBancariosDAOImpl implements DadosBancariosDAO {
     /*
+    private Connection conn;
+
+
+    public DadosBancariosDAOImpl(Connection conn){
+        this.conn = conn;
+    }
+
     @Override
     DadosBancarios inserir(DadosBancarios dados) {
         // código do CRUD com o BD

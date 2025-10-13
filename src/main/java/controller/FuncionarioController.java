@@ -39,7 +39,7 @@ public class FuncionarioController {
         Funcionario funcionario = new Funcionario(usuario, cargo, dataAdmissao, salario);
 
         // 
-        return 
+        return funcionarioService.inserir(funcionario);
     }
 
     boolean atualizar(int id, String nome, String sobrenome, int anoNascimento, int mesNascimento,
@@ -73,5 +73,5 @@ public class FuncionarioController {
         // código do CRUD com o BD
     }
 
-    */
+    
 }

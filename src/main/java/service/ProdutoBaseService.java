@@ -3,7 +3,13 @@ package service;
 
 public class ProdutoBaseService {
     /*
+    private ProdutoBaseDAOImpl produtoBaseDAOImpl;
 
+    public ProdutoBaseService() {
+        produtoBaseDAOImpl = new ProdutoBaseDAOImpl(DB.getConnection());
+    } 
+
+    
     ProdutoBase inserirProdutoBase(ProdutoBase produto) {
         // código do CRUD com o BD
     }
@@ -34,7 +40,7 @@ public class ProdutoBaseService {
         // código do CRUD com o BD
     }
 
-    List<ProdutoBase> buscarPorFornecedor(int idFornecedor) {
+    List<ProdutoBase> buscarPorProdutoBase(int idProdutoBase) {
         // código do CRUD com o BD
     }
 

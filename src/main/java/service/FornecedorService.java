@@ -3,7 +3,13 @@ package service;
 
 public class FornecedorService {
     /*
+    private FornecedorDAOImpl fornecedorDAOImpl;
 
+    public FornecedorService() {
+        fornecedorDAOImpl = new FornecedorDAOImpl(DB.getConnection());
+    } 
+
+    
     Fornecedor inserirFornecedor(Fornecedor fornecedor, ) {
         // código do CRUD com o BD
     }

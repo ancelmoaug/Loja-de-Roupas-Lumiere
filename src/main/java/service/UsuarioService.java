@@ -3,7 +3,13 @@ package service;
 
 public class UsuarioService {
     /*
+    private UsuarioDAOImpl usuarioDAOImpl;
 
+    public UsuarioService() {
+        usuarioDAOImpl = new UsuarioDAOImpl(DB.getConnection());
+    } 
+
+    
     Usuario inserirUsuario(Usuario usuario, id) {
         // código do CRUD com o BD
     }
