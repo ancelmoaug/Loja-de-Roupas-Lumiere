@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Funcionario extends Usuario {
     
-    private int id;
+    private int idFuncionario;
     private String cargo;
     private LocalDate dataAdmissao;
     private double salario;
@@ -19,7 +19,7 @@ public class Funcionario extends Usuario {
                     String email, DadosBancarios dadosBancarios, Endereco endereco, Telefone telefone,
                     int id, String cargo, LocalDate dataAdmissao, double salario){
         super(nome, sobrenome, senha, dataDeNascimento, cpf, telefone, endereco, email, dadosBancarios);
-        this.id = id;
+        this.idFuncionario = id;
         this.cargo = cargo;
         this.dataAdmissao = dataAdmissao;
         this.salario = salario;
@@ -28,8 +28,8 @@ public class Funcionario extends Usuario {
     public Funcionario(int idUsuario, String nome, String sobrenome, LocalDate dataDeNascimento, String senha, String cpf,
                     String email, DadosBancarios dadosBancarios, Endereco endereco, Telefone telefone,
                     int id, String cargo, LocalDate dataAdmissao, double salario) {
-        super(id, nome, sobrenome, senha, dataDeNascimento, cpf, telefone, endereco, email, dadosBancarios);
-        this.id = id;
+        super(idUsuario, nome, sobrenome, senha, dataDeNascimento, cpf, telefone, endereco, email, dadosBancarios);
+        this.idFuncionario = id;
         this.cargo = cargo;
         this.dataAdmissao = dataAdmissao;
         this.salario = salario;
@@ -44,12 +44,12 @@ public class Funcionario extends Usuario {
 
     public Funcionario() {super();}
 
-    public int getId() {
-        return id;
+    public int getIdFuncionario() {
+        return idFuncionario;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdFuncionario(int id) {
+        this.idFuncionario = id;
     }
 
     public void setDataAdmissao(LocalDate dataAdmissao) {
@@ -74,12 +74,6 @@ public class Funcionario extends Usuario {
 
     public void setSalario(double salario) {
         this.salario = salario;
-    }
-
-    // retorna id do usuario
-    public int getIdUsuario() {
-
-        return super.getId();
     }
 
 }

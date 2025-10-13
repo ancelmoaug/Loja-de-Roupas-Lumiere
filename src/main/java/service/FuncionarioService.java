@@ -4,7 +4,11 @@ import java.util.List;
 
 import db.DB;
 import impl.FuncionarioDAOImpl;
+import model.DadosBancarios;
+import model.Endereco;
 import model.Funcionario;
+import model.Telefone;
+import model.Usuario;
 
 public class FuncionarioService {
     
@@ -20,8 +24,32 @@ public class FuncionarioService {
     }
     
     // esse metodo deve chamar a funcao inserirUsuario de UsuarioService
-    public Funcionario inserirFuncionario(Funcionario funcionario) {
-        // código do CRUD com o BD
+    public Funcionario inserir(Funcionario funcionario) {
+        try {
+            // criar endereco no banco
+            EnderecoService enderecoService = new EnderecoService();
+            Endereco endereco = funcionario.getEndereco();
+            funcionario.setEndereco(enderecoService.inserirEndereco(endereco));
+
+            // criar telefone no banco
+            TelefoneService telefoneService = new TelefoneService();
+            Telefone telefone = funcionario.getEndereco();
+            funcionario.setTelefone(telefoneService.inserirTelefone(telefone));
+
+            // criar dados bancarios no banco
+            DadosBancariosService dadosBancariosService = new DadosBancariosService();
+            DadosBancarios dadosBancarios = funcionario.getDadosBancarios();
+            funcionario.setDadosBancarios(dadosBancariosService.inserirDadosBancarios(dadosBancarios));
+
+            // criar usuario no banco
+            UsuarioService usuarioService = new UsuarioService();
+            Usuario usuario = funcionario;
+            funcionario.
+
+
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
     }
 
     // esse metodo deve chamar a funcao atualizar de UsuarioService

@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Cliente extends Usuario {
     
-    private int id;
+    private int idCliente;
 
 
     public Cliente(String nome, String sobrenome, LocalDate dataDeNascimento, String senha, String cpf,
@@ -14,16 +14,16 @@ public class Cliente extends Usuario {
 
     public Cliente(String nome, String sobrenome, LocalDate dataDeNascimento, String senha, String cpf,
                     String email, DadosBancarios dadosBancarios, Endereco endereco, Telefone telefone,
-                    int id) {
+                    int idCliente) {
         super(nome, sobrenome, senha, dataDeNascimento, cpf, telefone, endereco, email, dadosBancarios);
-        this.id = id;
+        this.idCliente = idCliente;
     }
 
     public Cliente(int idUsuario, String nome, String sobrenome, LocalDate dataDeNascimento, String senha, String cpf,
                     String email, DadosBancarios dadosBancarios, Endereco endereco, Telefone telefone,
-                    int id) {
+                    int idCliente) {
         super(nome, sobrenome, senha, dataDeNascimento, cpf, telefone, endereco, email, dadosBancarios);
-        this.id = id;
+        this.idCliente = idCliente;
     }
 
     public Cliente(Usuario usuario) {
@@ -32,18 +32,12 @@ public class Cliente extends Usuario {
 
     public Cliente() {super();}
 
-    public int getId() {
-        return id;
+    public int getIdCliente() {
+        return idCliente;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    // retorna id do usuario
-    public int getIdUsuario() {
-
-        return super.getId();
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
 
 }

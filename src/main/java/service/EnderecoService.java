@@ -18,7 +18,7 @@ public class EnderecoService {
         // código do CRUD com o BD
     }
 
-    public boolean deletarEndereco(int id) {
+    public boolean deletar(int id) {
         // código do CRUD com o BD
     }
 
