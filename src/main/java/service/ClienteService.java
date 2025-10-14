@@ -1,58 +1,82 @@
 package service;
 
+import java.util.List;
+
+import db.DB;
+import impl.ClienteDAOImpl;
+import model.Carrinho;
+import model.Cliente;
+import model.Pedido;
+import model.Usuario;
 
 public class ClienteService {
-    /*
-
+    
     private ClienteDAOImpl clienteDAOImpl;
+    private UsuarioService usuarioService;
+    private CarrinhoService carrinhoService;
+    private PedidoService pedidoService;
 
     public ClienteService() {
         clienteDAOImpl = new ClienteDAOImpl(DB.getConnection());
+        usuarioService = new UsuarioService();
+        carrinhoService = new CarrinhoService();
+        pedidoService = new PedidoService();
     } 
 
-    // esse metodo deve chamar a funcao inserirUsuario de UsuarioService
-    public Cliente inserirCliente(Cliente cliente){ 
-
+    public ClienteDAOImpl getClienteDAOImpl() {
+        return clienteDAOImpl;
     }
 
-    // esse metodo deve chamar a funcao atualizar de UsuarioService
+    public Cliente inserir(Cliente cliente){ 
+        Usuario usuarioInserido = usuarioService.inserirUsuario(cliente);
+        
+        cliente.setId(usuarioInserido.getId());
+
+        return clienteDAOImpl.inserir(cliente);
+    }
+
     public boolean atualizar(Cliente cliente) {
-        // código do CRUD com o BD
+        usuarioService.atualizar(cliente);
+
+        return clienteDAOImpl.atualizar(cliente);
     }
 
     public boolean deletar(int id) {
-        // código do CRUD com o BD
+        // 1. O ClienteDAOImpl deleta apenas o cliente
+        boolean clienteDeletado = clienteDAOImpl.deletar(id);
+
+        // 2. O UsuarioService deleta o usuario e suas dependências
+        if (clienteDeletado) {
+             return usuarioService.deletar(id);
+        }
+        return false;
     }
 
     public Cliente buscarPorId(int id) {
-        // código do CRUD com o BD
+        return clienteDAOImpl.buscarPorId(id);
     }
 
     public List<Cliente> listarTodos() {
-        // código do CRUD com o BD
+        return clienteDAOImpl.listarTodos();
     }
 
-
-    // Específicos
     public Cliente buscarPorEmail(String email) {
-        // código do CRUD com o BD
+        return clienteDAOImpl.buscarPorEmail(email);
     }
 
     public Cliente buscarPorCpf(String cpf) {
-        // código do CRUD com o BD
+        return clienteDAOImpl.buscarPorCpf(cpf);
     }
 
     public List<Cliente> buscarPorNome(String nome) {
-        // código do CRUD com o BD
+        return clienteDAOImpl.buscarPorNome(nome);
     }
 
     public Carrinho buscarCarrinhoDoCliente(int idCliente) {
-        // código do CRUD com o BD
+        return carrinhoService.buscarPorCliente(idCliente);
     }
 
     public List<Pedido> listarPedidosDoCliente(int idCliente) {
-        // código do CRUD com o BD
+        return pedidoService.listarPedidosDoCliente(idCliente);
     }
-
-    */
 }

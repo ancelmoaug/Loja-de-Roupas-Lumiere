@@ -2,6 +2,11 @@ package service;
 
 
 public class UsuarioService {
+
+    public boolean deletar(int id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'deletar'");
+    }
     /*
     private UsuarioDAOImpl usuarioDAOImpl;
 
