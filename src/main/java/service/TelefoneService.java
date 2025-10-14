@@ -1,40 +1,66 @@
 package service;
 
+import java.util.List;
+
+import db.DB;
+import impl.TelefoneDAOImpl;
+import model.Telefone;
 
 public class TelefoneService {
-    /*
+
     private TelefoneDAOImpl telefoneDAOImpl;
 
-    public TelefoneService() {
+    public TelefoneService() { // Service instancia um DAOImpl mandando DB.getConnection
         telefoneDAOImpl = new TelefoneDAOImpl(DB.getConnection());
-    } 
-
-    
-    Telefone inserirTelefone(Telefone telefone) {
-        // código do CRUD com o BD
     }
 
-    boolean atualizar(Telefone telefone) {
-        // código do CRUD com o BD
+    public TelefoneDAOImpl getTelefoneDAOImpl() {
+        return telefoneDAOImpl;
     }
 
-    boolean deletar(int id) {
-        // código do CRUD com o BD
+    public Telefone inserirTelefone(Telefone telefone) {
+        try {
+            return telefoneDAOImpl.inserir(telefone);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
-    Telefone buscarPorId(int id) {
-        // código do CRUD com o BD
+    public boolean atualizar(Telefone telefone) {
+        try {
+            if (!(telefoneDAOImpl.buscarPorId(telefone.getId()) instanceof Telefone)) {
+                return false; // Se não existir, operação não foi sucesso
+            }
+            return telefoneDAOImpl.atualizar(telefone);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
-    List<Telefone> listarTodos() {
-        // código do CRUD com o BD
+    public boolean deletar(int id) {
+        try {
+            if (!(telefoneDAOImpl.buscarPorId(id) instanceof Telefone)) {
+                return false; // Se não existir, operação não foi sucesso
+            }
+            telefoneDAOImpl.deletar(id);
+            return true;
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
+    public Telefone buscarPorId(int id) {
+        return telefoneDAOImpl.buscarPorId(id);
+    }
+
+    public List<Telefone> listarTodos() {
+        return telefoneDAOImpl.listarTodos();
+    }
 
     // Específicos
-    Telefone buscarPorNumero(String numero) {
-        // código do CRUD com o BD
+    public Telefone buscarPorNumero(String numero) {
+        return telefoneDAOImpl.buscarPorNumero(numero);
     }
-
-    */
 }
+
+
