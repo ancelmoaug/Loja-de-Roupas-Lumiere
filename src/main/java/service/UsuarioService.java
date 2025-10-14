@@ -1,53 +1,67 @@
 package service;
 
+import db.DB;
+import impl.UsuarioDAOImpl;
+import model.Usuario;
+import java.util.List;
 
 public class UsuarioService {
-    /*
+
     private UsuarioDAOImpl usuarioDAOImpl;
 
     public UsuarioService() {
         usuarioDAOImpl = new UsuarioDAOImpl(DB.getConnection());
-    } 
-
-    
-    Usuario inserirUsuario(Usuario usuario, id) {
-        // código do CRUD com o BD
     }
 
-
-    boolean atualizar(Usuario usuario) {
-        // código do CRUD com o BD
+    public UsuarioDAOImpl getUsuarioDAOImpl() {
+        return usuarioDAOImpl;
     }
 
-
-    boolean deletar(int id) {
-        // código do CRUD com o BD
+    public Usuario inserirUsuario(Usuario usuario) {
+        try {
+            return usuarioDAOImpl.inserir(usuario);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
-
-    Usuario buscarPorId(int id) {
-        // código do CRUD com o BD
+    public boolean atualizar(Usuario usuario) {
+        try {
+            return usuarioDAOImpl.atualizar(usuario);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
-
-    List<Usuario> listarTodos() {
-        // código do CRUD com o BD
+    public boolean deletar(int id) {
+        try {
+            Usuario usuario = usuarioDAOImpl.buscarPorId(id);
+            if (!(usuario instanceof Usuario)) {
+                return false; 
+            }
+            return usuarioDAOImpl.deletar(id);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
-
-    Usuario buscarPorEmail(String email) {
-        // código do CRUD com o BD
+    public Usuario buscarPorId(int id) {
+        return usuarioDAOImpl.buscarPorId(id);
     }
 
-
-    Usuario buscarPorNome(String nome) {
-        // código do CRUD com o BD
+    public List<Usuario> listarTodos() {
+        return usuarioDAOImpl.listarTodos();
     }
 
-
-    Usuario buscarPorCpf(String cpf) {
-        // código do CRUD com o BD
+    public Usuario buscarPorEmail(String email) {
+        return usuarioDAOImpl.buscarPorEmail(email);
     }
 
-    */
+    public Usuario buscarPorNome(String nome) {
+        return usuarioDAOImpl.buscarPorNome(nome);
+    }
+
+    public Usuario buscarPorCpf(String cpf) {
+        return usuarioDAOImpl.buscarPorCpf(cpf);
+    }
 }
