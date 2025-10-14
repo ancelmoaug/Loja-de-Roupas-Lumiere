@@ -35,29 +35,19 @@ public class FuncionarioDAOImpl implements FuncionarioDAO {
         try {
             st = conn.prepareStatement(
                 "INSERT INTO funcionarios " +
-                "(cargo, data_admissao, salario, id) " +
-                "VALUES (?, ?, ?, ?)",
-                Statement.RETURN_GENERATED_KEYS
+                "(id, cargo, data_admissao, salario) " +
+                "VALUES (?, ?, ?, ?)"
             );
 
-            // Atributos específicos da tabela funcionarios
-            st.setString(1, funcionario.getCargo());
-            st.setDate(2, Date.valueOf(funcionario.getDataAdmissao())); // supondo que é LocalDate
-            st.setDouble(3, funcionario.getSalario());
-            st.setInt(4, funcionario.getIdUsuario()); // chave estrangeira (usuário associado)
+            // o ID vem do usuário já inserido
+            st.setInt(1, funcionario.getId()); 
+            st.setString(2, funcionario.getCargo());
+            st.setDate(3, Date.valueOf(funcionario.getDataAdmissao())); // LocalDate -> SQL Date
+            st.setDouble(4, funcionario.getSalario());
 
             int rowsAffected = st.executeUpdate();
 
-            if (rowsAffected > 0) {
-                ResultSet rs = st.getGeneratedKeys();
-
-                if (rs.next()) {
-                    int id = rs.getInt(1);
-                    funcionario.setIdFuncionario(id);
-                }
-
-                DB.closeResultSet(rs);
-            } else {
+            if (rowsAffected == 0) {
                 throw new DbException("Erro inesperado! Nenhuma linha foi afetada!");
             }
 
@@ -108,7 +98,7 @@ public class FuncionarioDAOImpl implements FuncionarioDAO {
         ResultSet rs = null;
 
         try {
-            // 1️⃣ Primeiro, buscar os IDs relacionados ao usuário
+            // Primeiro, buscar os IDs relacionados ao usuário
             st = conn.prepareStatement(
                 "SELECT id_endereco, id_telefone, id_dados_bancarios FROM usuarios WHERE id = ?"
             );

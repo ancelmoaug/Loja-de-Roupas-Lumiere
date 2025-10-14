@@ -4,7 +4,6 @@ import java.time.LocalDate;
 
 public class Funcionario extends Usuario {
     
-    private int idFuncionario;
     private String cargo;
     private LocalDate dataAdmissao;
     private double salario;
@@ -17,9 +16,8 @@ public class Funcionario extends Usuario {
 
     public Funcionario(String nome, String sobrenome, LocalDate dataDeNascimento, String senha, String cpf,
                     String email, DadosBancarios dadosBancarios, Endereco endereco, Telefone telefone,
-                    int id, String cargo, LocalDate dataAdmissao, double salario){
+                    String cargo, LocalDate dataAdmissao, double salario){
         super(nome, sobrenome, senha, dataDeNascimento, cpf, telefone, endereco, email, dadosBancarios);
-        this.idFuncionario = id;
         this.cargo = cargo;
         this.dataAdmissao = dataAdmissao;
         this.salario = salario;
@@ -27,9 +25,8 @@ public class Funcionario extends Usuario {
 
     public Funcionario(int idUsuario, String nome, String sobrenome, LocalDate dataDeNascimento, String senha, String cpf,
                     String email, DadosBancarios dadosBancarios, Endereco endereco, Telefone telefone,
-                    int id, String cargo, LocalDate dataAdmissao, double salario) {
+                    String cargo, LocalDate dataAdmissao, double salario) {
         super(idUsuario, nome, sobrenome, senha, dataDeNascimento, cpf, telefone, endereco, email, dadosBancarios);
-        this.idFuncionario = id;
         this.cargo = cargo;
         this.dataAdmissao = dataAdmissao;
         this.salario = salario;
@@ -44,13 +41,6 @@ public class Funcionario extends Usuario {
 
     public Funcionario() {super();}
 
-    public int getIdFuncionario() {
-        return idFuncionario;
-    }
-
-    public void setIdFuncionario(int id) {
-        this.idFuncionario = id;
-    }
 
     public void setDataAdmissao(LocalDate dataAdmissao) {
         this.dataAdmissao = dataAdmissao;

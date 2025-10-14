@@ -133,11 +133,11 @@ public class Usuario {
         this.email = email;
     }
 
-    public int getIdUsuario() {
+    public int getId() {
         return id;
     }
 
-    public void setIdUsuario(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
