@@ -1,53 +1,62 @@
 package controller;
 
+import java.util.List;
+import model.Endereco;
+import model.Fornecedor;
+import model.ProdutoBase;
+import model.Telefone;
+import service.FornecedorService;
 
 public class FornecedorController {
-    /*
+
     private FornecedorService fornecedorService;
 
     public FornecedorController() {
         fornecedorService = new FornecedorService();
-    } 
+    }
 
-    
-    Fornecedor inserirFornecedor(String razaoSocial, String nomeComercial, String cnpj, 
+    public Fornecedor inserirFornecedor(String razaoSocial, String nomeComercial, String cnpj, 
                                 String estado, String municipio, String cep, String bairro, String rua,
                                 String numero, String complemento,
                                 String telefoneComercial, String emailComercial) {
-        // código do CRUD com o BD
+        Endereco endereco = new Endereco(estado, municipio, cep, bairro, rua, numero, complemento);
+        Telefone telefone = new Telefone(telefoneComercial);
+        Fornecedor fornecedor = new Fornecedor(razaoSocial, nomeComercial, cnpj, endereco, telefone, emailComercial);
+        return fornecedorService.inserirFornecedor(fornecedor);
     }
 
-    boolean atualizar(int id, String razaoSocial, String nomeComercial, String cnpj, 
+    public boolean atualizar(int id, String razaoSocial, String nomeComercial, String cnpj, 
                                 String estado, String municipio, String cep, String bairro, String rua,
                                 String numero, String complemento,
                                 String telefoneComercial, String emailComercial) {
-        // código do CRUD com o BD
+        Endereco endereco = new Endereco(estado, municipio, cep, bairro, rua, numero, complemento);
+        Telefone telefone = new Telefone(telefoneComercial);
+        Fornecedor fornecedor = new Fornecedor(id, razaoSocial, nomeComercial, cnpj, endereco, telefone, emailComercial);
+        return fornecedorService.atualizar(fornecedor);
     }
 
-    boolean deletar(int id) {
-        // código do CRUD com o BD
+    public boolean deletar(int id) {
+        return fornecedorService.deletar(id);
     }
 
-    Fornecedor buscarPorId(int id) {
-        // código do CRUD com o BD
+    public Fornecedor buscarPorId(int id) {
+        return fornecedorService.buscarPorId(id);
     }
 
-    List<Fornecedor> listarTodos() {
-        // código do CRUD com o BD
+    public List<Fornecedor> listarTodos() {
+        return fornecedorService.listarTodos();
     }
 
     // Específicos
-    Fornecedor buscarPorCnpj(String cnpj) {
-        // código do CRUD com o BD
+    public Fornecedor buscarPorCnpj(String cnpj) {
+        return fornecedorService.buscarPorCnpj(cnpj);
     }
 
-    List<Fornecedor> buscarPorNomeComercial(String nomeComercial) {
-        // código do CRUD com o BD
+    public List<Fornecedor> buscarPorNomeComercial(String nomeComercial) {
+        return fornecedorService.buscarPorNomeComercial(nomeComercial);
     }
 
-    List<ProdutoBase> listarProdutosDoFornecedor(int idFornecedor) {
-        // código do CRUD com o BD
+    public List<ProdutoBase> listarProdutosDoFornecedor(int idFornecedor) {
+        return fornecedorService.listarProdutosDoFornecedor(idFornecedor);
     }
-
-    */
 }
