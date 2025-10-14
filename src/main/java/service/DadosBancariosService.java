@@ -1,45 +1,55 @@
 package service;
 
-import dao.DadosBancariosDAO;
+import db.DB;
+import impl.DadosBancariosDAOImpl;
+import model.DadosBancarios;
+import java.util.List;
 
-public class DadosBancariosService implements DadosBancariosDAO {
-    /*
+public class DadosBancariosService {
+
     private DadosBancariosDAOImpl dadosBancariosDAOImpl;
 
     public DadosBancariosService() {
         dadosBancariosDAOImpl = new DadosBancariosDAOImpl(DB.getConnection());
-    } 
+    }
 
-    
+    public DadosBancariosDAOImpl getDadosBancariosDAOImpl() {
+        return dadosBancariosDAOImpl;
+    }
+
     public DadosBancarios inserirDadosBancarios(DadosBancarios dados) {
-        // código do CRUD com o BD
+        try {
+            return dadosBancariosDAOImpl.inserir(dados);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     public boolean atualizar(DadosBancarios dados) {
-        // código do CRUD com o BD
+        try {
+            return dadosBancariosDAOImpl.atualizar(dados);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     public boolean deletar(int id) {
-        // código do CRUD com o BD
+        try {
+            if (!(dadosBancariosDAOImpl.buscarPorId(id) instanceof DadosBancarios)) {
+                return false; 
+            }
+            dadosBancariosDAOImpl.deletar(id); 
+            return true;
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     public DadosBancarios buscarPorId(int id) {
-        // código do CRUD com o BD
+        return dadosBancariosDAOImpl.buscarPorId(id);
     }
 
     public List<DadosBancarios> listarTodos() {
-        // código do CRUD com o BD
+        return dadosBancariosDAOImpl.listarTodos();
     }
-
-
-    // Específicos
-    public List<DadosBancarios> buscarPorCodigoBanco(String codigoBanco) {
-        // código do CRUD com o BD
-    }
-
-    public DadosBancarios buscarPorNumeroConta(String numeroConta) {
-        // código do CRUD com o BD
-    }
-
-    */
 }

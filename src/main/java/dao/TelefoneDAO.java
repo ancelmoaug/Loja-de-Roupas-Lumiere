@@ -1,7 +1,10 @@
 package dao;
 
+import java.util.List;
+import model.Telefone;
+
 public interface TelefoneDAO {
-    /*
+
     Telefone inserir(Telefone telefone);
     boolean atualizar(Telefone telefone);
     boolean deletar(int id);
@@ -10,5 +13,4 @@ public interface TelefoneDAO {
 
     // Específicos
     Telefone buscarPorNumero(String numero);
-    */
 }

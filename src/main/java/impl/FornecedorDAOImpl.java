@@ -1,56 +1,286 @@
 package impl;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
 import dao.FornecedorDAO;
+import db.DB;
+import db.DbException;
+import model.Endereco;
+import model.Fornecedor;
+import model.ProdutoBase;
+import model.Telefone;
 
 public class FornecedorDAOImpl implements FornecedorDAO {
-    /*
+
     private Connection conn;
 
-
-    public FornecedorDAOImpl(Connection conn){
+    public FornecedorDAOImpl(Connection conn) {
         this.conn = conn;
     }
 
     @Override
-    Fornecedor inserir(Fornecedor fornecedor) {
-        // código do CRUD com o BD
+    public Fornecedor inserir(Fornecedor fornecedor) {
+        PreparedStatement st = null;
+        try {
+            st = conn.prepareStatement(
+                "INSERT INTO fornecedor " +
+                "(razao_social, nome_comercial, cnpj, id_endereco, id_telefone_comercial, email_comercial) " +
+                "VALUES (?, ?, ?, ?, ?, ?)",
+                Statement.RETURN_GENERATED_KEYS
+            );
+
+            st.setString(1, fornecedor.getRazaoSocial());
+            st.setString(2, fornecedor.getNomeComercial());
+            st.setString(3, fornecedor.getCnpj());
+            st.setInt(4, fornecedor.getEndereco().getId());
+            st.setInt(5, fornecedor.getTelefoneComercial().getId());
+            st.setString(6, fornecedor.getEmailComercial());
+
+            int rowsAffected = st.executeUpdate();
+
+            if (rowsAffected > 0) {
+                ResultSet rs = st.getGeneratedKeys();
+                if (rs.next()) {
+                    int id = rs.getInt(1);
+                    fornecedor.setId(id);
+                }
+                DB.closeResultSet(rs);
+            } else {
+                throw new DbException("Erro inesperado! Nenhuma linha afetada!");
+            }
+
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatment(st);
+        }
+        return fornecedor;
     }
 
     @Override
-    boolean atualizar(Fornecedor fornecedor) {
-        // código do CRUD com o BD
+    public boolean atualizar(Fornecedor fornecedor) {
+        PreparedStatement st = null;
+        try {
+            st = conn.prepareStatement(
+                "UPDATE fornecedor " +
+                "SET razao_social = ?, nome_comercial = ?, cnpj = ?, id_endereco = ?, " +
+                "id_telefone_comercial = ?, email_comercial = ? " +
+                "WHERE id = ?"
+            );
+
+            st.setString(1, fornecedor.getRazaoSocial());
+            st.setString(2, fornecedor.getNomeComercial());
+            st.setString(3, fornecedor.getCnpj());
+            st.setInt(4, fornecedor.getEndereco().getId());
+            st.setInt(5, fornecedor.getTelefoneComercial().getId());
+            st.setString(6, fornecedor.getEmailComercial());
+            st.setInt(7, fornecedor.getId());
+
+            st.executeUpdate();
+            return true;
+
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatment(st);
+        }
     }
 
     @Override
-    boolean deletar(int id) {
-        // código do CRUD com o BD
+    public boolean deletar(int id) {
+        PreparedStatement st = null;
+        try {
+            st = conn.prepareStatement("DELETE FROM fornecedor WHERE id = ?");
+            st.setInt(1, id);
+            st.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatment(st);
+        }
     }
 
     @Override
-    Fornecedor buscarPorId(int id) {
-        // código do CRUD com o BD
+    public Fornecedor buscarPorId(int id) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = conn.prepareStatement(
+                "SELECT * FROM fornecedor WHERE id = ?"
+            );
+            st.setInt(1, id);
+            rs = st.executeQuery();
+
+            if (rs.next()) {
+                Fornecedor f = new Fornecedor();
+                f.setId(rs.getInt("id"));
+                f.setRazaoSocial(rs.getString("razao_social"));
+                f.setNomeComercial(rs.getString("nome_comercial"));
+                f.setCnpj(rs.getString("cnpj"));
+                f.setEmailComercial(rs.getString("email_comercial"));
+
+                Endereco endereco = new Endereco();
+                endereco.setId(rs.getInt("id_endereco"));
+                f.setEndereco(endereco);
+
+                Telefone telefone = new Telefone();
+                telefone.setId(rs.getInt("id_telefone_comercial"));
+                f.setTelefoneComercial(telefone);
+
+                return f;
+            }
+            return null;
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatment(st);
+            DB.closeResultSet(rs);
+        }
     }
 
     @Override
-    List<Fornecedor> listarTodos() {
-        // código do CRUD com o BD
+    public List<Fornecedor> listarTodos() {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        List<Fornecedor> lista = new ArrayList<>();
+        try {
+            st = conn.prepareStatement("SELECT * FROM fornecedor ORDER BY razao_social");
+            rs = st.executeQuery();
+
+            while (rs.next()) {
+                Fornecedor f = new Fornecedor();
+                f.setId(rs.getInt("id"));
+                f.setRazaoSocial(rs.getString("razao_social"));
+                f.setNomeComercial(rs.getString("nome_comercial"));
+                f.setCnpj(rs.getString("cnpj"));
+                f.setEmailComercial(rs.getString("email_comercial"));
+
+                Endereco endereco = new Endereco();
+                endereco.setId(rs.getInt("id_endereco"));
+                f.setEndereco(endereco);
+
+                Telefone telefone = new Telefone();
+                telefone.setId(rs.getInt("id_telefone_comercial"));
+                f.setTelefoneComercial(telefone);
+
+                lista.add(f);
+            }
+
+            return lista;
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatment(st);
+            DB.closeResultSet(rs);
+        }
     }
 
-    // Específicos
     @Override
-    Fornecedor buscarPorCnpj(String cnpj) {
-        // código do CRUD com o BD
+    public Fornecedor buscarPorCnpj(String cnpj) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = conn.prepareStatement("SELECT * FROM fornecedor WHERE cnpj = ?");
+            st.setString(1, cnpj);
+            rs = st.executeQuery();
+
+            if (rs.next()) {
+                Fornecedor f = new Fornecedor();
+                f.setId(rs.getInt("id"));
+                f.setRazaoSocial(rs.getString("razao_social"));
+                f.setNomeComercial(rs.getString("nome_comercial"));
+                f.setCnpj(rs.getString("cnpj"));
+                f.setEmailComercial(rs.getString("email_comercial"));
+
+                Endereco endereco = new Endereco();
+                endereco.setId(rs.getInt("id_endereco"));
+                f.setEndereco(endereco);
+
+                Telefone telefone = new Telefone();
+                telefone.setId(rs.getInt("id_telefone_comercial"));
+                f.setTelefoneComercial(telefone);
+
+                return f;
+            }
+            return null;
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatment(st);
+            DB.closeResultSet(rs);
+        }
     }
 
     @Override
-    List<Fornecedor> buscarPorNomeComercial(String nomeComercial) {
-        // código do CRUD com o BD
+    public List<Fornecedor> buscarPorNomeComercial(String nomeComercial) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        List<Fornecedor> lista = new ArrayList<>();
+        try {
+            st = conn.prepareStatement("SELECT * FROM fornecedor WHERE nome_comercial LIKE ?");
+            st.setString(1, "%" + nomeComercial + "%");
+            rs = st.executeQuery();
+
+            while (rs.next()) {
+                Fornecedor f = new Fornecedor();
+                f.setId(rs.getInt("id"));
+                f.setRazaoSocial(rs.getString("razao_social"));
+                f.setNomeComercial(rs.getString("nome_comercial"));
+                f.setCnpj(rs.getString("cnpj"));
+                f.setEmailComercial(rs.getString("email_comercial"));
+
+                Endereco endereco = new Endereco();
+                endereco.setId(rs.getInt("id_endereco"));
+                f.setEndereco(endereco);
+
+                Telefone telefone = new Telefone();
+                telefone.setId(rs.getInt("id_telefone_comercial"));
+                f.setTelefoneComercial(telefone);
+
+                lista.add(f);
+            }
+            return lista;
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatment(st);
+            DB.closeResultSet(rs);
+        }
     }
 
     @Override
-    List<ProdutoBase> listarProdutosDoFornecedor(int idFornecedor) {
-        // código do CRUD com o BD
-    }
+    public List<ProdutoBase> listarProdutosDoFornecedor(int idFornecedor) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        List<ProdutoBase> produtos = new ArrayList<>();
+        try {
+            st = conn.prepareStatement(
+                "SELECT p.* FROM produto_base p " +
+                "INNER JOIN fornecedor_produto fp ON p.id = fp.id_produto_base " +
+                "WHERE fp.id_fornecedor = ?"
+            );
+            st.setInt(1, idFornecedor);
+            rs = st.executeQuery();
 
-    */
+            while (rs.next()) {
+                ProdutoBase p = new ProdutoBase();
+                p.setId(rs.getInt("id"));
+                p.setNomeProduto(rs.getString("nome_produto"));
+                produtos.add(p);
+            }
+            return produtos;
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatment(st);
+            DB.closeResultSet(rs);
+        }
+    }
 }
