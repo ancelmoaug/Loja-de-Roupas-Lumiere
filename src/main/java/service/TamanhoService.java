@@ -1,14 +1,24 @@
 package service;
 
+import db.DB;
+import impl.TamanhoDAOImpl;
+import model.Tamanho;
 
 public class TamanhoService {
-    /*
-    
-    String buscarPorId(int id) {
-    // código 
+
+    private TamanhoDAOImpl tamanhoDAOImpl;
+
+    public TamanhoService() {
+        tamanhoDAOImpl = new TamanhoDAOImpl(DB.getConnection());
     }
-    int buscarPorTamanho(String tamanho) {
-    // código
+
+    public Tamanho buscarPorId(int id) {
+        return tamanhoDAOImpl.buscarPorId(id);
     }
-    */
+
+    public int buscarPorTamanho(String tamanho) {
+        int idTamanho = tamanhoDAOImpl.buscarPorTamanho(tamanho);
+        return idTamanho;
+    }
+
 }
