@@ -1,53 +1,59 @@
 package controller;
 
+import java.util.List;
+
+import model.Categoria;
+import model.Fornecedor;
+import model.MedidaTamanho;
+import model.Produto;
+import model.VariacaoProduto;
+import service.ProdutoService;
 
 public class ProdutoBaseController {
 
-    /*
-    private ProdutoBaseService produtoBaseService;
+   
 
-    
-    public ProdutoBaseController() {
-        produtoBaseService = new ProdutoBaseService();
-    } 
+    private ProdutoService produtoService;
 
-    
-    ProdutoBase inserirProdutoBase(String nome, String descricao, double precoBase, String categoria
-                                    int idFornecedor) {
-        // código do CRUD com o BD
+    public ProdutoController() {
+        produtoService = new ProdutoService();
     }
 
-    boolean atualizar(int id, String nome, String descricao, double precoBase, String categoria
-                                int idFornecedor, List<Integer> idsMedidasTamanho, int idCategoria
-                                ) {
-        // código do CRUD com o BD
+    public Produto inserirProduto(String nome, String descricao, double precoBase, 
+                                  Categoria categoria, List<VariacaoProduto> variacoes, 
+                                  List<MedidaTamanho> medidasPorTamanho, Fornecedor fornecedor) {
+
+        Produto produto = new Produto(nome, descricao, precoBase, categoria, variacoes, medidasPorTamanho, fornecedor);
+        return produtoService.inserir(produto);
     }
 
-    boolean deletar(int id) {
-        // código do CRUD com o BD
+    public boolean atualizar(int id, String nome, String descricao, double precoBase, 
+                             Categoria categoria, List<VariacaoProduto> variacoes, 
+                             List<MedidaTamanho> medidasPorTamanho, Fornecedor fornecedor) {
+
+        Produto produto = new Produto(id, nome, descricao, precoBase, categoria, variacoes, medidasPorTamanho, fornecedor);
+        return produtoService.atualizar(produto);
     }
 
-    ProdutoBase buscarPorId(int id) {
-        // código do CRUD com o BD
+    public boolean deletar(int id) {
+        return produtoService.deletar(id);
     }
 
-    List<ProdutoBase> listarTodos() {
-        // código do CRUD com o BD
+    public Produto buscarPorId(int id) {
+        return produtoService.buscarPorId(id);
     }
 
-
-    Específicos:
-    List<ProdutoBase> buscarPorNome(String nome) {
-        // código do CRUD com o BD
+    public List<Produto> listarTodos() {
+        return produtoService.listarTodos();
     }
 
-    List<ProdutoBase> buscarPorCategoria(String categoria) {
-        // código do CRUD com o BD
+    // Métodos específicos
+    public List<Produto> buscarPorCategoria(int idCategoria) {
+        return produtoService.buscarPorCategoria(idCategoria);
     }
 
-    List<ProdutoBase> buscarPorFornecedor(int idFornecedor) {
-        // código do CRUD com o BD
+    public List<Produto> buscarPorFornecedor(int idFornecedor) {
+        return produtoService.buscarPorFornecedor(idFornecedor);
     }
-
-    */
 }
+

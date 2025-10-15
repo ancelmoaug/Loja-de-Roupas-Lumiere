@@ -4,7 +4,6 @@ import java.time.LocalDate;
 
 public class Funcionario extends Usuario {
     
-    private int id;
     private String cargo;
     private LocalDate dataAdmissao;
     private double salario;
@@ -17,9 +16,8 @@ public class Funcionario extends Usuario {
 
     public Funcionario(String nome, String sobrenome, LocalDate dataDeNascimento, String senha, String cpf,
                     String email, DadosBancarios dadosBancarios, Endereco endereco, Telefone telefone,
-                    int id, String cargo, LocalDate dataAdmissao, double salario){
+                    String cargo, LocalDate dataAdmissao, double salario){
         super(nome, sobrenome, senha, dataDeNascimento, cpf, telefone, endereco, email, dadosBancarios);
-        this.id = id;
         this.cargo = cargo;
         this.dataAdmissao = dataAdmissao;
         this.salario = salario;
@@ -27,9 +25,8 @@ public class Funcionario extends Usuario {
 
     public Funcionario(int idUsuario, String nome, String sobrenome, LocalDate dataDeNascimento, String senha, String cpf,
                     String email, DadosBancarios dadosBancarios, Endereco endereco, Telefone telefone,
-                    int id, String cargo, LocalDate dataAdmissao, double salario) {
-        super(id, nome, sobrenome, senha, dataDeNascimento, cpf, telefone, endereco, email, dadosBancarios);
-        this.id = id;
+                    String cargo, LocalDate dataAdmissao, double salario) {
+        super(idUsuario, nome, sobrenome, senha, dataDeNascimento, cpf, telefone, endereco, email, dadosBancarios);
         this.cargo = cargo;
         this.dataAdmissao = dataAdmissao;
         this.salario = salario;
@@ -44,13 +41,6 @@ public class Funcionario extends Usuario {
 
     public Funcionario() {super();}
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public void setDataAdmissao(LocalDate dataAdmissao) {
         this.dataAdmissao = dataAdmissao;
@@ -74,12 +64,6 @@ public class Funcionario extends Usuario {
 
     public void setSalario(double salario) {
         this.salario = salario;
-    }
-
-    // retorna id do usuario
-    public int getIdUsuario() {
-
-        return super.getId();
     }
 
 }

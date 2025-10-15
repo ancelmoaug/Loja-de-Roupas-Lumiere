@@ -35,29 +35,19 @@ public class FuncionarioDAOImpl implements FuncionarioDAO {
         try {
             st = conn.prepareStatement(
                 "INSERT INTO funcionarios " +
-                "(cargo, data_admissao, salario, id) " +
-                "VALUES (?, ?, ?, ?)",
-                Statement.RETURN_GENERATED_KEYS
+                "(id, cargo, data_admissao, salario) " +
+                "VALUES (?, ?, ?, ?)"
             );
 
-            // Atributos específicos da tabela funcionarios
-            st.setString(1, funcionario.getCargo());
-            st.setDate(2, Date.valueOf(funcionario.getDataAdmissao())); // supondo que é LocalDate
-            st.setDouble(3, funcionario.getSalario());
-            st.setInt(4, funcionario.getIdUsuario()); // chave estrangeira (usuário associado)
+            // o ID vem do usuário já inserido
+            st.setInt(1, funcionario.getId()); 
+            st.setString(2, funcionario.getCargo());
+            st.setDate(3, Date.valueOf(funcionario.getDataAdmissao())); // LocalDate -> SQL Date
+            st.setDouble(4, funcionario.getSalario());
 
             int rowsAffected = st.executeUpdate();
 
-            if (rowsAffected > 0) {
-                ResultSet rs = st.getGeneratedKeys();
-
-                if (rs.next()) {
-                    int id = rs.getInt(1);
-                    funcionario.setId(id);
-                }
-
-                DB.closeResultSet(rs);
-            } else {
+            if (rowsAffected == 0) {
                 throw new DbException("Erro inesperado! Nenhuma linha foi afetada!");
             }
 
@@ -108,7 +98,7 @@ public class FuncionarioDAOImpl implements FuncionarioDAO {
         ResultSet rs = null;
 
         try {
-            // 1️⃣ Primeiro, buscar os IDs relacionados ao usuário
+            // Primeiro, buscar os IDs relacionados ao usuário
             st = conn.prepareStatement(
                 "SELECT id_endereco, id_telefone, id_dados_bancarios FROM usuarios WHERE id = ?"
             );
@@ -366,11 +356,90 @@ public class FuncionarioDAOImpl implements FuncionarioDAO {
             DB.closeResultSet(rs);
         }
     }
-    /* 
+     
     @Override
     public List<Funcionario> buscarPorNome(String nome) {
-        // código do CRUD com o BD
-    }*/
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        List<Funcionario> lista = new ArrayList<>();
+
+        try {
+            st = conn.prepareStatement(
+                "SELECT f.id AS func_id, f.cargo, f.data_admissao, f.salario, " +
+                "u.id AS user_id, u.nome, u.sobrenome, u.data_nascimento, u.senha, u.cpf, u.email, " +
+                "e.id AS end_id, e.estado, e.municipio, e.bairro, e.rua, e.numero, e.complemento, " +
+                "t.id AS tel_id, t.numero AS telefone_numero, " +
+                "d.id AS db_id, d.codigo_agencia, d.numero_conta, d.codigo_banco " +
+                "FROM funcionarios f " +
+                "INNER JOIN usuarios u ON f.id = u.id " +
+                "LEFT JOIN enderecos e ON u.id_endereco = e.id " +
+                "LEFT JOIN telefones t ON u.id_telefone = t.id " +
+                "LEFT JOIN dados_bancarios d ON u.id_dados_bancarios = d.id " +
+                "WHERE u.nome LIKE ? " +
+                "ORDER BY u.nome"
+            );
+
+            st.setString(1, "%" + nome + "%");
+            rs = st.executeQuery();
+
+            while (rs.next()) {
+                // --- Criar Endereco ---
+                Endereco endereco = new Endereco();
+                endereco.setId(rs.getInt("end_id"));
+                endereco.setEstado(rs.getString("estado"));
+                endereco.setMunicipio(rs.getString("municipio"));
+                endereco.setBairro(rs.getString("bairro"));
+                endereco.setRua(rs.getString("rua"));
+                endereco.setNumero(rs.getString("numero"));
+                endereco.setComplemento(rs.getString("complemento"));
+
+                // --- Criar Telefone ---
+                Telefone telefone = new Telefone();
+                telefone.setId(rs.getInt("tel_id"));
+                telefone.setNumero(rs.getString("telefone_numero"));
+
+                // --- Criar Dados Bancários ---
+                DadosBancarios dados = new DadosBancarios(
+                    rs.getString("codigo_agencia"),
+                    rs.getString("numero_conta"),
+                    rs.getString("codigo_banco")
+                );
+                dados.setId(rs.getInt("db_id"));
+
+                // --- Criar Usuario ---
+                Usuario usuario = new Usuario();
+                usuario.setId(rs.getInt("user_id"));
+                usuario.setNome(rs.getString("nome"));
+                usuario.setSobrenome(rs.getString("sobrenome"));
+                usuario.setDataDeNascimento(rs.getDate("data_nascimento").toLocalDate());
+                usuario.setSenha(rs.getString("senha"));
+                usuario.setCpf(rs.getString("cpf"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setEndereco(endereco);
+                usuario.setTelefone(telefone);
+                usuario.setDadosBancarios(dados);
+
+                // --- Criar Funcionario ---
+                Funcionario funcionario = new Funcionario(
+                    usuario,
+                    rs.getString("cargo"),
+                    rs.getDate("data_admissao").toLocalDate(),
+                    rs.getDouble("salario")
+                );
+                funcionario.setId(rs.getInt("func_id"));
+
+                lista.add(funcionario);
+            }
+
+            return lista;
+
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatment(st);
+            DB.closeResultSet(rs);
+        }
+    }
 
     
 }

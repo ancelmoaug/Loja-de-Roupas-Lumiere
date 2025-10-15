@@ -1,47 +1,70 @@
 package service;
 
+import db.DB;
+import impl.FornecedorDAOImpl;
+import java.util.List;
+import model.Fornecedor;
+import model.ProdutoBase;
 
 public class FornecedorService {
-    /*
+
     private FornecedorDAOImpl fornecedorDAOImpl;
 
-    public FornecedorService() {
+    public FornecedorService() { // Service instancia um DAOImpl mandando um DB.getConnection no construtor
         fornecedorDAOImpl = new FornecedorDAOImpl(DB.getConnection());
-    } 
-
-    
-    Fornecedor inserirFornecedor(Fornecedor fornecedor, ) {
-        // código do CRUD com o BD
     }
 
-    boolean atualizar(Fornecedor fornecedor) {
-        // código do CRUD com o BD
+    public FornecedorDAOImpl getFornecedorDAOImpl() {
+        return fornecedorDAOImpl;
     }
 
-    boolean deletar(int id) {
-        // código do CRUD com o BD
+    // CRUD Básico
+    public Fornecedor inserirFornecedor(Fornecedor fornecedor) {
+        try {
+            return fornecedorDAOImpl.inserir(fornecedor);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
-    Fornecedor buscarPorId(int id) {
-        // código do CRUD com o BD
+    public boolean atualizar(Fornecedor fornecedor) {
+        try {
+            return fornecedorDAOImpl.atualizar(fornecedor);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
-    List<Fornecedor> listarTodos() {
-        // código do CRUD com o BD
+    public boolean deletar(int id) {
+        try {
+            if (!(fornecedorDAOImpl.buscarPorId(id) instanceof Fornecedor)) {
+                return false; // se não tiver, retorna false
+            }
+            fornecedorDAOImpl.deletar(id); // se tiver, deleta
+            return true;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    public Fornecedor buscarPorId(int id) {
+        return fornecedorDAOImpl.buscarPorId(id);
+    }
+
+    public List<Fornecedor> listarTodos() {
+        return fornecedorDAOImpl.listarTodos();
     }
 
     // Específicos
-    Fornecedor buscarPorCnpj(String cnpj) {
-        // código do CRUD com o BD
+    public Fornecedor buscarPorCnpj(String cnpj) {
+        return fornecedorDAOImpl.buscarPorCnpj(cnpj);
     }
 
-    List<Fornecedor> buscarPorNomeComercial(String nomeComercial) {
-        // código do CRUD com o BD
+    public List<Fornecedor> buscarPorNomeComercial(String nomeComercial) {
+        return fornecedorDAOImpl.buscarPorNomeComercial(nomeComercial);
     }
 
-    List<ProdutoBase> listarProdutosDoFornecedor(int idFornecedor) {
-        // código do CRUD com o BD
+    public List<ProdutoBase> listarProdutosDoFornecedor(int idFornecedor) {
+        return fornecedorDAOImpl.listarProdutosDoFornecedor(idFornecedor);
     }
-
-    */
 }

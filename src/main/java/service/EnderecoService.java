@@ -1,49 +1,68 @@
 package service;
 
+import java.util.List;
+
+import db.DB;
+import impl.EnderecoDAOImpl;
+import model.Endereco;
 
 public class EnderecoService {
-    /*
+
     private EnderecoDAOImpl enderecoDAOImpl;
 
-    public EnderecoService() {
+    public EnderecoService() { 
         enderecoDAOImpl = new EnderecoDAOImpl(DB.getConnection());
-    } 
+    }
 
-    
+    public EnderecoDAOImpl getEnderecoDAOImpl() {
+        return enderecoDAOImpl;
+    }
+
+    // Inserir endereço
     public Endereco inserirEndereco(Endereco endereco) {
-        // código do CRUD com o BD
+        return enderecoDAOImpl.inserir(endereco);
     }
 
-    public boolean atualizar(Endereco endereco) {
-        // código do CRUD com o BD
+    // Atualizar endereço
+    public boolean atualizarEndereco(Endereco endereco) {
+        return enderecoDAOImpl.atualizar(endereco);
     }
 
+    // Deletar endereço
     public boolean deletarEndereco(int id) {
-        // código do CRUD com o BD
+        try {
+            if (enderecoDAOImpl.buscarPorId(id) == null) { 
+                return false;
+            }
+            enderecoDAOImpl.deletar(id);
+            return true;
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
+    // Buscar por ID
     public Endereco buscarPorId(int id) {
-        // código do CRUD com o BD
+        return enderecoDAOImpl.buscarPorId(id);
     }
 
-    public Endereco buscarPorUsuario(Usuario usuario) {
-        // código do CRUD com o BD
-    }
-
-
-
-    // Específicos
+    // Buscar por município
     public List<Endereco> buscarPorCidade(String cidade) {
-        // código do CRUD com o BD
+        return enderecoDAOImpl.buscarPorMunicipio(cidade);
     }
 
+    // Buscar por estado
     public List<Endereco> buscarPorEstado(String estado) {
-        // código do CRUD com o BD
+        return enderecoDAOImpl.buscarPorEstado(estado);
     }
 
+    // Buscar por CEP
     public List<Endereco> buscarPorCep(String cep) {
-        // código do CRUD com o BD
+        return enderecoDAOImpl.buscarPorCep(cep);
     }
 
-    */
+    // Listar todos
+    public List<Endereco> listarTodosEnderecos() {
+        return enderecoDAOImpl.listarTodos();
+    }
 }
