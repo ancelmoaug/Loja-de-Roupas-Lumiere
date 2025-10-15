@@ -16,13 +16,14 @@ public class ProdutoBaseDAOImpl implements ProdutoBaseDAO {
 
     private Connection conn;
 
+
     public ProdutoBaseDAOImpl(Connection conn) {
         this.conn = conn;
     }
 
     @Override
     public ProdutoBase inserir(ProdutoBase produto) {
-        String sql = "INSERT INTO produto_base (nome, descricao, preco_base, id_categoria, id_fornecedor) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO produtos_base (nome, descricao, preco_base, id_categoria, id_fornecedor) VALUES (?, ?, ?, ?, ?)";
         try {
             PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             stmt.setString(1, produto.getNome());
@@ -47,7 +48,7 @@ public class ProdutoBaseDAOImpl implements ProdutoBaseDAO {
 
     @Override
     public boolean atualizar(ProdutoBase produto) {
-        String sql = "UPDATE produto_base SET nome = ?, descricao = ?, preco_base = ?, id_categoria = ?, id_fornecedor = ? WHERE id = ?";
+        String sql = "UPDATE produtos_base SET nome = ?, descricao = ?, preco_base = ?, id_categoria = ?, id_fornecedor = ? WHERE id = ?";
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, produto.getNome());
@@ -66,7 +67,7 @@ public class ProdutoBaseDAOImpl implements ProdutoBaseDAO {
 
     @Override
     public boolean deletar(int id) {
-        String sql = "DELETE FROM produto_base WHERE id = ?";
+        String sql = "DELETE FROM produtos_base WHERE id = ?";
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, id);
@@ -79,7 +80,7 @@ public class ProdutoBaseDAOImpl implements ProdutoBaseDAO {
 
     @Override
     public ProdutoBase buscarPorId(int id) {
-        String sql = "SELECT * FROM produto_base WHERE id = ?";
+        String sql = "SELECT * FROM produtos_base WHERE id = ?";
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, id);
@@ -97,7 +98,7 @@ public class ProdutoBaseDAOImpl implements ProdutoBaseDAO {
     @Override
     public List<ProdutoBase> listarTodos() {
         List<ProdutoBase> lista = new ArrayList<>();
-        String sql = "SELECT * FROM produto_base";
+        String sql = "SELECT * FROM produtos_base";
 
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -116,7 +117,7 @@ public class ProdutoBaseDAOImpl implements ProdutoBaseDAO {
     @Override
     public List<ProdutoBase> buscarPorNome(String nome) {
         List<ProdutoBase> lista = new ArrayList<>();
-        String sql = "SELECT * FROM produto_base WHERE nome LIKE ?";
+        String sql = "SELECT * FROM produtos_base WHERE nome LIKE ?";
 
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -137,7 +138,7 @@ public class ProdutoBaseDAOImpl implements ProdutoBaseDAO {
     public List<ProdutoBase> buscarPorCategoria(String categoria) {
         List<ProdutoBase> lista = new ArrayList<>();
         String sql = """
-            SELECT pb.* FROM produto_base pb
+            SELECT pb.* FROM produtos_base pb
             INNER JOIN categorias c ON pb.id_categoria = c.id
             WHERE c.nome_categoria LIKE ?
         """;
@@ -160,7 +161,7 @@ public class ProdutoBaseDAOImpl implements ProdutoBaseDAO {
     @Override
     public List<ProdutoBase> buscarPorFornecedor(int idFornecedor) {
         List<ProdutoBase> lista = new ArrayList<>();
-        String sql = "SELECT * FROM produto_base WHERE id_fornecedor = ?";
+        String sql = "SELECT * FROM produtos_base WHERE id_fornecedor = ?";
 
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -180,7 +181,8 @@ public class ProdutoBaseDAOImpl implements ProdutoBaseDAO {
     // Método auxiliar para montar o objeto ProdutoBase a partir do ResultSet
     private ProdutoBase montarProduto(ResultSet rs) throws SQLException {
         Categoria categoria = new Categoria(rs.getInt("id_categoria"), null);
-        Fornecedor fornecedor = new Fornecedor(rs.getInt("id_fornecedor"), null);
+        Fornecedor fornecedor = new Fornecedor();
+        fornecedor.setId(rs.getInt("id_fornecedor"));
 
         return new ProdutoBase(
             rs.getInt("id"),

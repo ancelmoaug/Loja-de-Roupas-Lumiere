@@ -26,7 +26,7 @@ public class FuncionarioService {
             // Inserir endereço
             EnderecoService enderecoService = new EnderecoService();
             Endereco endereco = funcionario.getEndereco();
-            funcionario.setEndereco(enderecoService.inserirEndereco(endereco));
+            funcionario.setEndereco(enderecoService.inserir(endereco));
 
             // Inserir telefone
             TelefoneService telefoneService = new TelefoneService();
@@ -115,7 +115,7 @@ public class FuncionarioService {
             usuarioService.deletar(funcionario.getId());
 
             // Deletar funcionário
-            return funcionarioDAOImpl.deletar(idFuncionario);
+            return funcionarioDAOImpl.deletar(id);
 
         } catch (Exception e) {
             throw e;

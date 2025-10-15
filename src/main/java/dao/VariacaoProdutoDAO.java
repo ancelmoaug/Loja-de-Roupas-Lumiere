@@ -1,15 +1,15 @@
 package dao;
 
 import java.util.List;
-import model.DadosBancarios;
+import model.VariacaoProduto;
 
-public interface DadosBancariosDAO {
+public interface VariacaoProdutoDAO {
 
-    DadosBancarios inserir(DadosBancarios dados);
-    boolean atualizar(DadosBancarios dados);
+    VariacaoProduto inserir(VariacaoProduto variacao);
+    boolean atualizar(VariacaoProduto variacao);
     boolean deletar(int id);
-    DadosBancarios buscarPorId(int id);
+    VariacaoProduto buscarPorId(int id);
 
-    // Específicos (adicione mais se necessário futuramente)
-    List<DadosBancarios> listarTodos();
+    // Específicos
+    List<VariacaoProduto> buscarPorProdutoBase(int idProdutoBase);
 }

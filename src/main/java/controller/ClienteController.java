@@ -3,28 +3,21 @@ package controller;
 import java.time.LocalDate;
 import java.util.List;
 
-import model.Carrinho;
 import model.Cliente;
 import model.DadosBancarios;
 import model.Endereco;
-import model.Pedido;
 import model.Telefone;
 import model.Usuario;
 import service.ClienteService;
-import service.CarrinhoService;
-import service.PedidoService;
 
 
 public class ClienteController {
     
     private ClienteService clienteService;
-    private CarrinhoService carrinhoService;
-    private PedidoService pedidoService;
 
+    
     public ClienteController() {
         clienteService = new ClienteService();
-        carrinhoService = new CarrinhoService();
-        pedidoService = new PedidoService();
     }
 
     public Cliente inserirCliente(String nome, String sobrenome, int anoNascimento, int mesNascimento,
@@ -108,12 +101,4 @@ public class ClienteController {
     }
 
 
-    public Carrinho buscarCarrinhoDoCliente(int idCliente) {
-        return carrinhoService.buscarPorCliente(idCliente);
-    }
-
-
-    public List<Pedido> listarPedidosDoCliente(int idCliente) {
-        return pedidoService.listarPedidosDoCliente(idCliente);
-    }
 }

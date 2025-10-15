@@ -26,7 +26,7 @@ public class TelefoneDAOImpl implements TelefoneDAO {
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
-                    "INSERT INTO telefone (numero) VALUES (?)",
+                    "INSERT INTO telefones (numero) VALUES (?)",
                     Statement.RETURN_GENERATED_KEYS
             );
 
@@ -56,7 +56,7 @@ public class TelefoneDAOImpl implements TelefoneDAO {
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
-                    "UPDATE telefone SET numero = ? WHERE id = ?"
+                    "UPDATE telefones SET numero = ? WHERE id = ?"
             );
             st.setString(1, telefone.getNumero());
             st.setInt(2, telefone.getId());
@@ -75,7 +75,7 @@ public class TelefoneDAOImpl implements TelefoneDAO {
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
-                    "DELETE FROM telefone WHERE id = ?"
+                    "DELETE FROM telefones WHERE id = ?"
             );
             st.setInt(1, id);
             st.executeUpdate();
@@ -92,7 +92,7 @@ public class TelefoneDAOImpl implements TelefoneDAO {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-            st = conn.prepareStatement("SELECT * FROM telefone WHERE id = ?");
+            st = conn.prepareStatement("SELECT * FROM telefones WHERE id = ?");
             st.setInt(1, id);
             rs = st.executeQuery();
             if (rs.next()) {
@@ -116,7 +116,7 @@ public class TelefoneDAOImpl implements TelefoneDAO {
         ResultSet rs = null;
         List<Telefone> lista = new ArrayList<>();
         try {
-            st = conn.prepareStatement("SELECT * FROM telefone");
+            st = conn.prepareStatement("SELECT * FROM telefones");
             rs = st.executeQuery();
             while (rs.next()) {
                 Telefone telefone = new Telefone();
@@ -138,7 +138,7 @@ public class TelefoneDAOImpl implements TelefoneDAO {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-            st = conn.prepareStatement("SELECT * FROM telefone WHERE numero = ?");
+            st = conn.prepareStatement("SELECT * FROM telefones WHERE numero = ?");
             st.setString(1, numero);
             rs = st.executeQuery();
             if (rs.next()) {

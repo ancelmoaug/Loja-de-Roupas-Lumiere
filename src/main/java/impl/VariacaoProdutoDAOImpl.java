@@ -6,9 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.Statement;
 
 import dao.VariacaoProdutoDAO;
+
+import java.sql.Statement;
+
 import db.DB;
 import db.DbException;
 import model.Tamanho;

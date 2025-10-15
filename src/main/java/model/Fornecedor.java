@@ -44,6 +44,22 @@ public class Fornecedor {
 
     public Fornecedor() {}
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public List<ProdutoBase> getProdutosFornecidos() {
+        return produtosFornecidos;
+    }
+
+    public void setProdutosFornecidos(List<ProdutoBase> produtosFornecidos) {
+        this.produtosFornecidos = produtosFornecidos;
+    }
+
     public String getRazaoSocial() {
         return razaoSocial;
     }

@@ -239,8 +239,4 @@ public class EnderecoDAOImpl implements EnderecoDAO {
         }
     }
 
-    public List<Endereco> listarTodos() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listarTodos'");
-    }
 }

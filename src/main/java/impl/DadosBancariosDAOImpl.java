@@ -1,6 +1,5 @@
 package impl;
 
-import db.DB;
 import model.DadosBancarios;
 import java.sql.*;
 import java.util.ArrayList;

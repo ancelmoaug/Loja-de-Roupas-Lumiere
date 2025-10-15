@@ -28,7 +28,7 @@ public class MedidaTamanhoDAOImpl implements MedidaTamanhoDAO {
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
-                "INSERT INTO medida_tamanho " +
+                "INSERT INTO medidas_tamanho " +
                 "(id_produto_base, id_tamanho, comprimento, quadril, cintura, busto, manga) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?)",
                 Statement.RETURN_GENERATED_KEYS
@@ -68,7 +68,7 @@ public class MedidaTamanhoDAOImpl implements MedidaTamanhoDAO {
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
-                "UPDATE medida_tamanho " +
+                "UPDATE medidas_tamanho " +
                 "SET id_produto_base = ?, id_tamanho = ?, comprimento = ?, quadril = ?, " +
                 "cintura = ?, busto = ?, manga = ? " +
                 "WHERE id = ?"
@@ -97,7 +97,7 @@ public class MedidaTamanhoDAOImpl implements MedidaTamanhoDAO {
     public boolean deletar(int id) {
         PreparedStatement st = null;
         try {
-            st = conn.prepareStatement("DELETE FROM medida_tamanho WHERE id = ?");
+            st = conn.prepareStatement("DELETE FROM medidas_tamanho WHERE id = ?");
             st.setInt(1, id);
             st.executeUpdate();
             return true;
@@ -115,7 +115,7 @@ public class MedidaTamanhoDAOImpl implements MedidaTamanhoDAO {
         try {
             st = conn.prepareStatement(
                 "SELECT m.*, p.nome_produto, t.nome_tamanho " +
-                "FROM medida_tamanho m " +
+                "FROM medidas_tamanho m " +
                 "INNER JOIN produto_base p ON m.id_produto_base = p.id " +
                 "INNER JOIN tamanhos t ON m.id_tamanho = t.id " +
                 "WHERE m.id = ?"
@@ -126,7 +126,7 @@ public class MedidaTamanhoDAOImpl implements MedidaTamanhoDAO {
             if (rs.next()) {
                 ProdutoBase produto = new ProdutoBase();
                 produto.setId(rs.getInt("id_produto_base"));
-                produto.setNomeProduto(rs.getString("nome_produto"));
+                produto.setNome(rs.getString("nome_produto"));
 
                 Tamanho tamanho = new Tamanho();
                 tamanho.setId(rs.getInt("id_tamanho"));
@@ -162,7 +162,7 @@ public class MedidaTamanhoDAOImpl implements MedidaTamanhoDAO {
         try {
             st = conn.prepareStatement(
                 "SELECT m.*, p.nome_produto, t.nome_tamanho " +
-                "FROM medida_tamanho m " +
+                "FROM medidas_tamanho m " +
                 "INNER JOIN produto_base p ON m.id_produto_base = p.id " +
                 "INNER JOIN tamanhos t ON m.id_tamanho = t.id " +
                 "ORDER BY p.nome_produto, t.nome_tamanho"
@@ -172,7 +172,7 @@ public class MedidaTamanhoDAOImpl implements MedidaTamanhoDAO {
             while (rs.next()) {
                 ProdutoBase produto = new ProdutoBase();
                 produto.setId(rs.getInt("id_produto_base"));
-                produto.setNomeProduto(rs.getString("nome_produto"));
+                produto.setNome(rs.getString("nome_produto"));
 
                 Tamanho tamanho = new Tamanho();
                 tamanho.setId(rs.getInt("id_tamanho"));
@@ -208,7 +208,7 @@ public class MedidaTamanhoDAOImpl implements MedidaTamanhoDAO {
         try {
             st = conn.prepareStatement(
                 "SELECT m.*, p.nome_produto, t.nome_tamanho " +
-                "FROM medida_tamanho m " +
+                "FROM medidas_tamanho m " +
                 "INNER JOIN produto_base p ON m.id_produto_base = p.id " +
                 "INNER JOIN tamanhos t ON m.id_tamanho = t.id " +
                 "WHERE m.id_produto_base = ?"
@@ -219,7 +219,7 @@ public class MedidaTamanhoDAOImpl implements MedidaTamanhoDAO {
             while (rs.next()) {
                 ProdutoBase produto = new ProdutoBase();
                 produto.setId(rs.getInt("id_produto_base"));
-                produto.setNomeProduto(rs.getString("nome_produto"));
+                produto.setNome(rs.getString("nome_produto"));
 
                 Tamanho tamanho = new Tamanho();
                 tamanho.setId(rs.getInt("id_tamanho"));
@@ -255,7 +255,7 @@ public class MedidaTamanhoDAOImpl implements MedidaTamanhoDAO {
         try {
             st = conn.prepareStatement(
                 "SELECT m.*, p.nome_produto, t.nome_tamanho " +
-                "FROM medida_tamanho m " +
+                "FROM medidas_tamanho m " +
                 "INNER JOIN produto_base p ON m.id_produto_base = p.id " +
                 "INNER JOIN tamanhos t ON m.id_tamanho = t.id " +
                 "WHERE t.nome_tamanho LIKE ?"
@@ -266,7 +266,7 @@ public class MedidaTamanhoDAOImpl implements MedidaTamanhoDAO {
             while (rs.next()) {
                 ProdutoBase produto = new ProdutoBase();
                 produto.setId(rs.getInt("id_produto_base"));
-                produto.setNomeProduto(rs.getString("nome_produto"));
+                produto.setNome(rs.getString("nome_produto"));
 
                 Tamanho tamanho = new Tamanho();
                 tamanho.setId(rs.getInt("id_tamanho"));
