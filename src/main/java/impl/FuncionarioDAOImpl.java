@@ -1,11 +1,9 @@
 package impl;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,25 +32,23 @@ public class FuncionarioDAOImpl implements FuncionarioDAO {
 
         try {
             st = conn.prepareStatement(
-                "INSERT INTO funcionarios " +
-                "(id, cargo, data_admissao, salario) " +
-                "VALUES (?, ?, ?, ?)"
+                "INSERT INTO funcionarios (id, cargo, data_admissao, salario) VALUES (?, ?, ?, ?)"
             );
 
-            // o ID vem do usuário já inserido
-            st.setInt(1, funcionario.getId()); 
+            // O ID do funcionário é o mesmo do usuário já inserido
+            st.setInt(1, funcionario.getId());
             st.setString(2, funcionario.getCargo());
-            st.setDate(3, Date.valueOf(funcionario.getDataAdmissao())); // LocalDate -> SQL Date
+            st.setDate(3, java.sql.Date.valueOf(funcionario.getDataAdmissao()));
             st.setDouble(4, funcionario.getSalario());
 
             int rowsAffected = st.executeUpdate();
 
             if (rowsAffected == 0) {
-                throw new DbException("Erro inesperado! Nenhuma linha foi afetada!");
+                throw new DbException("Erro inesperado! Nenhuma linha foi afetada na tabela funcionarios!");
             }
 
         } catch (SQLException e) {
-            throw new DbException(e.getMessage());
+            throw new DbException("Erro ao inserir Funcionário: " + e.getMessage());
         } finally {
             DB.closeStatment(st);
         }
@@ -66,24 +62,22 @@ public class FuncionarioDAOImpl implements FuncionarioDAO {
 
         try {
             st = conn.prepareStatement(
-                "UPDATE funcionarios "
-                + "SET cargo = ?, data_admissao = ?, salario = ? "
-                + "WHERE id = ?"
+                "UPDATE funcionarios SET cargo = ?, data_admissao = ?, salario = ? WHERE id = ?"
             );
 
             st.setString(1, funcionario.getCargo());
-            st.setDate(2, java.sql.Date.valueOf(funcionario.getDataAdmissao())); // LocalDate -> SQL Date
+            st.setDate(2, java.sql.Date.valueOf(funcionario.getDataAdmissao()));
             st.setDouble(3, funcionario.getSalario());
-            st.setInt(4, funcionario.getId()); // id herdado de Usuario
+            st.setInt(4, funcionario.getId());
 
             int rowsAffected = st.executeUpdate();
 
             if (rowsAffected == 0) {
-                throw new DbException("Nenhuma linha foi atualizada! Verifique se o ID existe.");
+                throw new DbException("Nenhuma linha foi atualizada! Verifique se o ID do funcionário existe.");
             }
 
         } catch (SQLException e) {
-            throw new DbException(e.getMessage());
+            throw new DbException("Erro ao atualizar Funcionário: " + e.getMessage());
         } finally {
             DB.closeStatment(st);
         }
@@ -91,77 +85,29 @@ public class FuncionarioDAOImpl implements FuncionarioDAO {
         return true;
     }
 
- 
     @Override
     public boolean deletar(int id) {
         PreparedStatement st = null;
-        ResultSet rs = null;
 
         try {
-            // Primeiro, buscar os IDs relacionados ao usuário
-            st = conn.prepareStatement(
-                "SELECT id_endereco, id_telefone, id_dados_bancarios FROM usuarios WHERE id = ?"
-            );
-            st.setInt(1, id);
-            rs = st.executeQuery();
-
-            Integer idEndereco = null;
-            Integer idTelefone = null;
-            Integer idDadosBancarios = null;
-
-            if (rs.next()) {
-                idEndereco = rs.getInt("id_endereco");
-                idTelefone = rs.getInt("id_telefone");
-                idDadosBancarios = rs.getInt("id_dados_bancarios");
-            }
-
-            DB.closeResultSet(rs);
-            DB.closeStatment(st);
-
-            // 2️⃣ Deletar primeiro o funcionário (tabela filha)
             st = conn.prepareStatement("DELETE FROM funcionarios WHERE id = ?");
             st.setInt(1, id);
-            st.executeUpdate();
-            DB.closeStatment(st);
 
-            // 3️⃣ Deletar o usuário (tabela pai)
-            st = conn.prepareStatement("DELETE FROM usuarios WHERE id = ?");
-            st.setInt(1, id);
-            st.executeUpdate();
-            DB.closeStatment(st);
+            int rowsAffected = st.executeUpdate();
 
-            // 4️⃣ Deletar os dados relacionados, se existirem
-            if (idEndereco != null && idEndereco > 0) {
-                st = conn.prepareStatement("DELETE FROM enderecos WHERE id = ?");
-                st.setInt(1, idEndereco);
-                st.executeUpdate();
-                DB.closeStatment(st);
-            }
-
-            if (idTelefone != null && idTelefone > 0) {
-                st = conn.prepareStatement("DELETE FROM telefones WHERE id = ?");
-                st.setInt(1, idTelefone);
-                st.executeUpdate();
-                DB.closeStatment(st);
-            }
-
-            if (idDadosBancarios != null && idDadosBancarios > 0) {
-                st = conn.prepareStatement("DELETE FROM dados_bancarios WHERE id = ?");
-                st.setInt(1, idDadosBancarios);
-                st.executeUpdate();
-                DB.closeStatment(st);
+            if (rowsAffected == 0) {
+                throw new DbException("Nenhum funcionário encontrado com o ID informado!");
             }
 
         } catch (SQLException e) {
-            throw new DbException(e.getMessage());
+            throw new DbException("Erro ao deletar Funcionário: " + e.getMessage());
         } finally {
             DB.closeStatment(st);
-            DB.closeResultSet(rs);
         }
 
         return true;
-
     }
+
 
     @Override
     public Funcionario buscarPorId(int id) {

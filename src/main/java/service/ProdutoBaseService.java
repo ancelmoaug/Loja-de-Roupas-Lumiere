@@ -16,7 +16,7 @@ public class ProdutoBaseService {
 
     // CRUD básico
 
-    public ProdutoBase inserirProdutoBase(ProdutoBase produto) {
+    public ProdutoBase inserir(ProdutoBase produto) {
         if (produto == null || produto.getNome() == null || produto.getNome().trim().isEmpty()) {
             System.out.println("Produto inválido!");
             return null;

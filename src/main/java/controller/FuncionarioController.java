@@ -9,7 +9,6 @@ import model.Funcionario;
 import model.Telefone;
 import model.Usuario;
 import service.FuncionarioService;
-import service.VariacaoProdutoService;
 
 public class FuncionarioController {
 

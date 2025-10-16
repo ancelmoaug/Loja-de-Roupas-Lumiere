@@ -1,6 +1,5 @@
 package service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import db.DB;
@@ -29,7 +28,7 @@ public class VariacaoProdutoService {
             ProdutoBase produtoBase = produtoBaseService.buscarPorId(idProdutoBase);
 
             TamanhoService tamanhoService = new TamanhoService();
-            Tamanho tamanho = tamanhoService.buscarPorId();
+            Tamanho tamanho = tamanhoService.buscarPorId(idTamanho);
 
             variacao.setProdutoBase(produtoBase);
             variacao.setTamanho(tamanho);
@@ -48,7 +47,7 @@ public class VariacaoProdutoService {
             ProdutoBase produtoBase = produtoBaseService.buscarPorId(idProdutoBase);
 
             TamanhoService tamanhoService = new TamanhoService();
-            Tamanho tamanho = tamanhoService.buscarPorId();
+            Tamanho tamanho = tamanhoService.buscarPorId(idTamanho);
 
             variacao.setProdutoBase(produtoBase);
             variacao.setTamanho(tamanho);

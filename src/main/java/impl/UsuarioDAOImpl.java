@@ -15,7 +15,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
     @Override
     public Usuario inserir(Usuario usuario) {
-        String sql = "INSERT INTO usuario (nome, sobrenome, senha, data_nascimento, cpf, telefone, endereco, email, dados_bancarios) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO usuarios (nome, sobrenome, senha, data_nascimento, cpf, telefone, endereco, email, dados_bancarios) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, usuario.getNome());
             stmt.setString(2, usuario.getSobrenome());
@@ -43,7 +43,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
     @Override
     public boolean atualizar(Usuario usuario) {
-        String sql = "UPDATE usuario SET nome = ?, sobrenome = ?, senha = ?, data_nascimento = ?, cpf = ?, telefone = ?, endereco = ?, email = ?, dados_bancarios = ? WHERE id = ?";
+        String sql = "UPDATE usuarios SET nome = ?, sobrenome = ?, senha = ?, data_nascimento = ?, cpf = ?, telefone = ?, endereco = ?, email = ?, dados_bancarios = ? WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, usuario.getNome());
             stmt.setString(2, usuario.getSobrenome());
@@ -66,7 +66,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
     @Override
     public boolean deletar(int id) {
-        String sql = "DELETE FROM usuario WHERE id = ?";
+        String sql = "DELETE FROM usuarios WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, id);
             int rowsAffected = stmt.executeUpdate();
@@ -79,7 +79,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
     @Override
     public Usuario buscarPorId(int id) {
-        String sql = "SELECT * FROM usuario WHERE id = ?";
+        String sql = "SELECT * FROM usuarios WHERE id = ?";
         Usuario usuario = null;
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, id);
@@ -101,7 +101,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
     @Override
     public List<Usuario> listarTodos() {
-        String sql = "SELECT * FROM usuario";
+        String sql = "SELECT * FROM usuarios";
         List<Usuario> usuarios = new ArrayList<>();
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             ResultSet rs = stmt.executeQuery();
@@ -123,7 +123,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
     @Override
     public Usuario buscarPorEmail(String email) {
-        String sql = "SELECT * FROM usuario WHERE email = ?";
+        String sql = "SELECT * FROM usuarios WHERE email = ?";
         Usuario usuario = null;
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, email);
@@ -145,7 +145,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
     @Override
     public Usuario buscarPorNome(String nome) {
-        String sql = "SELECT * FROM usuario WHERE nome = ?";
+        String sql = "SELECT * FROM usuarios WHERE nome = ?";
         Usuario usuario = null;
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, nome);
@@ -167,7 +167,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
     @Override
     public Usuario buscarPorCpf(String cpf) {
-        String sql = "SELECT * FROM usuario WHERE cpf = ?";
+        String sql = "SELECT * FROM usuarios WHERE cpf = ?";
         Usuario usuario = null;
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, cpf);

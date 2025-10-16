@@ -19,17 +19,17 @@ public class EnderecoService {
     }
 
     // Inserir endereço
-    public Endereco inserirEndereco(Endereco endereco) {
+    public Endereco inserir(Endereco endereco) {
         return enderecoDAOImpl.inserir(endereco);
     }
 
     // Atualizar endereço
-    public boolean atualizarEndereco(Endereco endereco) {
+    public boolean atualizar(Endereco endereco) {
         return enderecoDAOImpl.atualizar(endereco);
     }
 
     // Deletar endereço
-    public boolean deletarEndereco(int id) {
+    public boolean deletar(int id) {
         try {
             if (enderecoDAOImpl.buscarPorId(id) == null) { 
                 return false;
@@ -61,8 +61,4 @@ public class EnderecoService {
         return enderecoDAOImpl.buscarPorCep(cep);
     }
 
-    // Listar todos
-    public List<Endereco> listarTodosEnderecos() {
-        return enderecoDAOImpl.listarTodos();
-    }
 }

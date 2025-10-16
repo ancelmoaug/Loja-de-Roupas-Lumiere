@@ -5,55 +5,54 @@ import java.util.List;
 import model.Categoria;
 import model.Fornecedor;
 import model.MedidaTamanho;
-import model.Produto;
+import model.ProdutoBase;
 import model.VariacaoProduto;
-import service.ProdutoService;
+import service.ProdutoBaseService;
 
 public class ProdutoBaseController {
 
-   
+    private ProdutoBaseService produtoBaseService;
 
-    private ProdutoService produtoService;
 
-    public ProdutoController() {
-        produtoService = new ProdutoService();
+    public ProdutoBaseController() {
+        produtoBaseService = new ProdutoBaseService();
     }
 
-    public Produto inserirProduto(String nome, String descricao, double precoBase, 
+    public ProdutoBase inserirProduto(String nome, String descricao, double precoBase, 
                                   Categoria categoria, List<VariacaoProduto> variacoes, 
                                   List<MedidaTamanho> medidasPorTamanho, Fornecedor fornecedor) {
 
-        Produto produto = new Produto(nome, descricao, precoBase, categoria, variacoes, medidasPorTamanho, fornecedor);
-        return produtoService.inserir(produto);
+        ProdutoBase produto = new ProdutoBase(nome, descricao, precoBase, categoria, fornecedor);
+        return produtoBaseService.inserir(produto);
     }
 
-    public boolean atualizar(int id, String nome, String descricao, double precoBase, 
+    public boolean atualizar(String nome, String descricao, double precoBase, 
                              Categoria categoria, List<VariacaoProduto> variacoes, 
                              List<MedidaTamanho> medidasPorTamanho, Fornecedor fornecedor) {
 
-        Produto produto = new Produto(id, nome, descricao, precoBase, categoria, variacoes, medidasPorTamanho, fornecedor);
-        return produtoService.atualizar(produto);
+        ProdutoBase produto = new ProdutoBase(nome, descricao, precoBase, categoria, fornecedor);
+        return produtoBaseService.atualizar(produto);
     }
 
     public boolean deletar(int id) {
-        return produtoService.deletar(id);
+        return produtoBaseService.deletar(id);
     }
 
-    public Produto buscarPorId(int id) {
-        return produtoService.buscarPorId(id);
+    public ProdutoBase buscarPorId(int id) {
+        return produtoBaseService.buscarPorId(id);
     }
 
-    public List<Produto> listarTodos() {
-        return produtoService.listarTodos();
+    public List<ProdutoBase> listarTodos() {
+        return produtoBaseService.listarTodos();
     }
 
     // Métodos específicos
-    public List<Produto> buscarPorCategoria(int idCategoria) {
-        return produtoService.buscarPorCategoria(idCategoria);
+    public List<ProdutoBase> buscarPorCategoria(String categoria) {
+        return produtoBaseService.buscarPorCategoria(categoria);
     }
 
-    public List<Produto> buscarPorFornecedor(int idFornecedor) {
-        return produtoService.buscarPorFornecedor(idFornecedor);
+    public List<ProdutoBase> buscarPorFornecedor(int idFornecedor) {
+        return produtoBaseService.buscarPorFornecedor(idFornecedor);
     }
 }
 

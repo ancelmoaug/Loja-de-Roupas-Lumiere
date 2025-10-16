@@ -11,6 +11,7 @@ import java.util.List;
 import dao.FornecedorDAO;
 import db.DB;
 import db.DbException;
+import model.Categoria;
 import model.Endereco;
 import model.Fornecedor;
 import model.ProdutoBase;
@@ -29,7 +30,7 @@ public class FornecedorDAOImpl implements FornecedorDAO {
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
-                "INSERT INTO fornecedor " +
+                "INSERT INTO fornecedores " +
                 "(razao_social, nome_comercial, cnpj, id_endereco, id_telefone_comercial, email_comercial) " +
                 "VALUES (?, ?, ?, ?, ?, ?)",
                 Statement.RETURN_GENERATED_KEYS
@@ -68,7 +69,7 @@ public class FornecedorDAOImpl implements FornecedorDAO {
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
-                "UPDATE fornecedor " +
+                "UPDATE fornecedores " +
                 "SET razao_social = ?, nome_comercial = ?, cnpj = ?, id_endereco = ?, " +
                 "id_telefone_comercial = ?, email_comercial = ? " +
                 "WHERE id = ?"
@@ -96,7 +97,7 @@ public class FornecedorDAOImpl implements FornecedorDAO {
     public boolean deletar(int id) {
         PreparedStatement st = null;
         try {
-            st = conn.prepareStatement("DELETE FROM fornecedor WHERE id = ?");
+            st = conn.prepareStatement("DELETE FROM fornecedores WHERE id = ?");
             st.setInt(1, id);
             st.executeUpdate();
             return true;
@@ -113,7 +114,7 @@ public class FornecedorDAOImpl implements FornecedorDAO {
         ResultSet rs = null;
         try {
             st = conn.prepareStatement(
-                "SELECT * FROM fornecedor WHERE id = ?"
+                "SELECT * FROM fornecedores WHERE id = ?"
             );
             st.setInt(1, id);
             rs = st.executeQuery();
@@ -151,7 +152,7 @@ public class FornecedorDAOImpl implements FornecedorDAO {
         ResultSet rs = null;
         List<Fornecedor> lista = new ArrayList<>();
         try {
-            st = conn.prepareStatement("SELECT * FROM fornecedor ORDER BY razao_social");
+            st = conn.prepareStatement("SELECT * FROM fornecedores ORDER BY razao_social");
             rs = st.executeQuery();
 
             while (rs.next()) {
@@ -187,7 +188,7 @@ public class FornecedorDAOImpl implements FornecedorDAO {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-            st = conn.prepareStatement("SELECT * FROM fornecedor WHERE cnpj = ?");
+            st = conn.prepareStatement("SELECT * FROM fornecedores WHERE cnpj = ?");
             st.setString(1, cnpj);
             rs = st.executeQuery();
 
@@ -224,7 +225,7 @@ public class FornecedorDAOImpl implements FornecedorDAO {
         ResultSet rs = null;
         List<Fornecedor> lista = new ArrayList<>();
         try {
-            st = conn.prepareStatement("SELECT * FROM fornecedor WHERE nome_comercial LIKE ?");
+            st = conn.prepareStatement("SELECT * FROM fornecedores WHERE nome_comercial LIKE ?");
             st.setString(1, "%" + nomeComercial + "%");
             rs = st.executeQuery();
 
@@ -260,22 +261,38 @@ public class FornecedorDAOImpl implements FornecedorDAO {
         PreparedStatement st = null;
         ResultSet rs = null;
         List<ProdutoBase> produtos = new ArrayList<>();
+
         try {
             st = conn.prepareStatement(
-                "SELECT p.* FROM produto_base p " +
-                "INNER JOIN fornecedor_produto fp ON p.id = fp.id_produto_base " +
-                "WHERE fp.id_fornecedor = ?"
+                "SELECT p.id AS id_produto, p.nome AS nome_produto, p.descricao, p.preco_base, " +
+                "c.id AS id_categoria, c.nome_categoria " +
+                "FROM produtos_base p " +
+                "INNER JOIN categorias c ON p.id_categoria = c.id " +
+                "WHERE p.id_fornecedor = ?"
             );
+
             st.setInt(1, idFornecedor);
             rs = st.executeQuery();
 
             while (rs.next()) {
-                ProdutoBase p = new ProdutoBase();
-                p.setId(rs.getInt("id"));
-                p.setNomeProduto(rs.getString("nome_produto"));
-                produtos.add(p);
+                // Preenche ProdutoBase
+                ProdutoBase produto = new ProdutoBase();
+                produto.setId(rs.getInt("id_produto"));
+                produto.setNome(rs.getString("nome_produto"));
+                produto.setDescricao(rs.getString("descricao"));
+                produto.setPrecoBase(rs.getDouble("preco_base"));
+
+                // Preenche Categoria
+                Categoria categoria = new Categoria();
+                categoria.setId(rs.getInt("id_categoria"));
+                categoria.setNomeCategoria(rs.getString("nome_categoria"));
+                produto.setCategoria(categoria);
+
+                produtos.add(produto);
             }
+
             return produtos;
+
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {

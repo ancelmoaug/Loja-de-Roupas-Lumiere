@@ -3,11 +3,9 @@ package impl;
 import dao.ClienteDAO;
 import db.DB;
 import db.DbException;
-import model.Carrinho;
 import model.Cliente;
 import model.DadosBancarios;
 import model.Endereco;
-import model.Pedido;
 import model.Telefone;
 import model.Usuario;
 
@@ -16,7 +14,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,83 +21,24 @@ public class ClienteDAOImpl implements ClienteDAO {
     
     private Connection conn;
 
+
     public ClienteDAOImpl(Connection conn){
         this.conn = conn;
     }
 
-    private Cliente instantiateCliente(ResultSet rs) throws SQLException {
-        
-        Endereco endereco = null;
-        int endId = rs.getInt("end_id");
-        if (endId > 0) {
-            endereco = new Endereco();
-            endereco.setId(endId);
-            endereco.setEstado(rs.getString("estado"));
-            endereco.setMunicipio(rs.getString("municipio"));
-            endereco.setBairro(rs.getString("bairro"));
-            endereco.setRua(rs.getString("rua"));
-            endereco.setNumero(rs.getString("numero"));
-            endereco.setComplemento(rs.getString("complemento"));
-        }
-
-        
-        Telefone telefone = null;
-        int telId = rs.getInt("tel_id");
-        if (telId > 0) {
-            telefone = new Telefone();
-            telefone.setId(telId);
-            telefone.setNumero(rs.getString("telefone_numero"));
-        }
-
-        
-        DadosBancarios dados = null;
-        int dbId = rs.getInt("db_id");
-        if (dbId > 0) {
-            dados = new DadosBancarios(rs.getString("codigo_agencia"), rs.getString("numero_conta"), rs.getString("codigo_banco"));
-            dados.setId(dbId);
-        }
-        
-        
-        Usuario usuario = new Usuario();
-        usuario.setId(rs.getInt("user_id"));
-        usuario.setNome(rs.getString("nome"));
-        usuario.setSobrenome(rs.getString("sobrenome"));
-        
-        Date dataNascimento = rs.getDate("data_nascimento");
-        if (dataNascimento != null) {
-             usuario.setDataDeNascimento(dataNascimento.toLocalDate());
-        }
-       
-        usuario.setSenha(rs.getString("senha"));
-        usuario.setCpf(rs.getString("cpf"));
-        usuario.setEmail(rs.getString("email"));
-        usuario.setEndereco(endereco);
-        usuario.setTelefone(telefone);
-        usuario.setDadosBancarios(dados);
-
-        
-        Cliente cliente = new Cliente(usuario);
-        cliente.setId(rs.getInt("client_id"));
-
-        return cliente;
-    }
 
 
-<<<<<<< HEAD
     @Override
     public Cliente inserir(Cliente cliente){
-        
         PreparedStatement st = null;
 
         try {
-            // Insere na tabela 'cliente' usando o ID gerado na tabela 'usuarios'
             st = conn.prepareStatement(
-                "INSERT INTO cliente (id) VALUES (?)",
-                Statement.NO_GENERATED_KEYS // Não pede chave gerada, pois o ID já foi fornecido
+                "INSERT INTO clientes (id) VALUES (?)"
             );
 
-            
-            st.setInt(1, cliente.getId()); 
+            // O ID do cliente é o mesmo do usuário já inserido
+            st.setInt(1, cliente.getId());
 
             int rowsAffected = st.executeUpdate();
 
@@ -119,38 +57,61 @@ public class ClienteDAOImpl implements ClienteDAO {
     
     @Override
     public boolean atualizar(Cliente cliente) {
-       
-        return true;
-    }
-
-    @Override
-    public boolean deletar(int id) {
-        
-        
         PreparedStatement st = null;
 
         try {
-            
-            st = conn.prepareStatement("DELETE FROM cliente WHERE id = ?");
-            st.setInt(1, id);
+            st = conn.prepareStatement(
+                "UPDATE clientes SET id = ? WHERE id = ?"
+            );
+
+            // Aqui, por enquanto, estamos apenas mantendo o mesmo id.
+            // Essa linha só faz sentido se você pretende atualizar o id (raro),
+            // mas mantemos a estrutura para compatibilidade futura.
+            st.setInt(1, cliente.getId());
+            st.setInt(2, cliente.getId());
+
             int rowsAffected = st.executeUpdate();
-            
+
             if (rowsAffected == 0) {
-                return false; 
+                throw new DbException("Nenhuma linha foi atualizada! Verifique se o ID do cliente existe.");
             }
 
-            return true;
+        } catch (SQLException e) {
+            throw new DbException("Erro ao atualizar Cliente: " + e.getMessage());
+        } finally {
+            DB.closeStatment(st);
+        }
+
+        return true;
+    }
+
+
+    @Override
+    public boolean deletar(int id) {
+        PreparedStatement st = null;
+
+        try {
+            st = conn.prepareStatement("DELETE FROM clientes WHERE id = ?");
+            st.setInt(1, id);
+
+            int rowsAffected = st.executeUpdate();
+
+            if (rowsAffected == 0) {
+                // Nenhum registro com o ID informado
+                throw new DbException("Nenhum cliente encontrado com o ID informado!");
+            }
 
         } catch (SQLException e) {
             throw new DbException("Erro ao deletar Cliente: " + e.getMessage());
         } finally {
             DB.closeStatment(st);
         }
+
+        return true;
     }
 
     @Override
     public Cliente buscarPorId(int id) {
-        
         PreparedStatement st = null;
         ResultSet rs = null;
 
@@ -160,8 +121,8 @@ public class ClienteDAOImpl implements ClienteDAO {
                 "u.id AS user_id, u.nome, u.sobrenome, u.data_nascimento, u.senha, u.cpf, u.email, " +
                 "e.id AS end_id, e.estado, e.municipio, e.bairro, e.rua, e.numero, e.complemento, " +
                 "t.id AS tel_id, t.numero AS telefone_numero, " +
-                "d.id AS db_id, d.codigo_agencia, d.codigo_banco, d.numero_conta " +
-                "FROM cliente c " +
+                "d.id AS db_id, d.codigo_agencia, d.numero_conta, d.codigo_banco " +
+                "FROM clientes c " +
                 "INNER JOIN usuarios u ON c.id = u.id " +
                 "LEFT JOIN enderecos e ON u.id_endereco = e.id " +
                 "LEFT JOIN telefones t ON u.id_telefone = t.id " +
@@ -173,7 +134,52 @@ public class ClienteDAOImpl implements ClienteDAO {
             rs = st.executeQuery();
 
             if (rs.next()) {
-                return instantiateCliente(rs);
+                // --- Criar objeto Endereco ---
+                Endereco endereco = new Endereco();
+                endereco.setId(rs.getInt("end_id"));
+                endereco.setEstado(rs.getString("estado"));
+                endereco.setMunicipio(rs.getString("municipio"));
+                endereco.setBairro(rs.getString("bairro"));
+                endereco.setRua(rs.getString("rua"));
+                endereco.setNumero(rs.getString("numero"));
+                endereco.setComplemento(rs.getString("complemento"));
+
+                // --- Criar objeto Telefone ---
+                Telefone telefone = new Telefone();
+                telefone.setId(rs.getInt("tel_id"));
+                telefone.setNumero(rs.getString("telefone_numero"));
+
+                // --- Criar objeto DadosBancarios ---
+                DadosBancarios dados = new DadosBancarios(
+                    rs.getString("codigo_agencia"),
+                    rs.getString("numero_conta"),
+                    rs.getString("codigo_banco")
+                );
+                dados.setId(rs.getInt("db_id"));
+
+                // --- Criar objeto Usuario ---
+                Usuario usuario = new Usuario();
+                usuario.setId(rs.getInt("user_id"));
+                usuario.setNome(rs.getString("nome"));
+                usuario.setSobrenome(rs.getString("sobrenome"));
+                
+                Date dataNascimento = rs.getDate("data_nascimento");
+                if (dataNascimento != null) {
+                    usuario.setDataDeNascimento(dataNascimento.toLocalDate());
+                }
+
+                usuario.setSenha(rs.getString("senha"));
+                usuario.setCpf(rs.getString("cpf"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setEndereco(endereco);
+                usuario.setTelefone(telefone);
+                usuario.setDadosBancarios(dados);
+
+                // --- Criar objeto Cliente ---
+                Cliente cliente = new Cliente(usuario);
+                cliente.setId(rs.getInt("client_id"));
+
+                return cliente;
             }
 
             return null;
@@ -188,10 +194,8 @@ public class ClienteDAOImpl implements ClienteDAO {
 
     @Override
     public List<Cliente> listarTodos() {
-        
         PreparedStatement st = null;
         ResultSet rs = null;
-        List<Cliente> lista = new ArrayList<>();
 
         try {
             st = conn.prepareStatement(
@@ -199,8 +203,8 @@ public class ClienteDAOImpl implements ClienteDAO {
                 "u.id AS user_id, u.nome, u.sobrenome, u.data_nascimento, u.senha, u.cpf, u.email, " +
                 "e.id AS end_id, e.estado, e.municipio, e.bairro, e.rua, e.numero, e.complemento, " +
                 "t.id AS tel_id, t.numero AS telefone_numero, " +
-                "d.id AS db_id, d.codigo_agencia, d.codigo_banco, d.numero_conta " +
-                "FROM cliente c " +
+                "d.id AS db_id, d.codigo_agencia, d.numero_conta, d.codigo_banco " +
+                "FROM clientes c " +
                 "INNER JOIN usuarios u ON c.id = u.id " +
                 "LEFT JOIN enderecos e ON u.id_endereco = e.id " +
                 "LEFT JOIN telefones t ON u.id_telefone = t.id " +
@@ -210,8 +214,55 @@ public class ClienteDAOImpl implements ClienteDAO {
 
             rs = st.executeQuery();
 
+            List<Cliente> lista = new ArrayList<>();
+
             while (rs.next()) {
-                lista.add(instantiateCliente(rs));
+                // --- Criar Endereco ---
+                Endereco endereco = new Endereco();
+                endereco.setId(rs.getInt("end_id"));
+                endereco.setEstado(rs.getString("estado"));
+                endereco.setMunicipio(rs.getString("municipio"));
+                endereco.setBairro(rs.getString("bairro"));
+                endereco.setRua(rs.getString("rua"));
+                endereco.setNumero(rs.getString("numero"));
+                endereco.setComplemento(rs.getString("complemento"));
+
+                // --- Criar Telefone ---
+                Telefone telefone = new Telefone();
+                telefone.setId(rs.getInt("tel_id"));
+                telefone.setNumero(rs.getString("telefone_numero"));
+
+                // --- Criar Dados Bancários ---
+                DadosBancarios dados = new DadosBancarios(
+                    rs.getString("codigo_agencia"),
+                    rs.getString("numero_conta"),
+                    rs.getString("codigo_banco")
+                );
+                dados.setId(rs.getInt("db_id"));
+
+                // --- Criar Usuario ---
+                Usuario usuario = new Usuario();
+                usuario.setId(rs.getInt("user_id"));
+                usuario.setNome(rs.getString("nome"));
+                usuario.setSobrenome(rs.getString("sobrenome"));
+                
+                java.sql.Date sqlData = rs.getDate("data_nascimento");
+                if (sqlData != null) {
+                    usuario.setDataDeNascimento(sqlData.toLocalDate()); // converte para LocalDate
+                }
+
+                usuario.setSenha(rs.getString("senha"));
+                usuario.setCpf(rs.getString("cpf"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setEndereco(endereco);
+                usuario.setTelefone(telefone);
+                usuario.setDadosBancarios(dados);
+
+                // --- Criar Cliente ---
+                Cliente cliente = new Cliente(usuario);
+                cliente.setId(rs.getInt("client_id"));
+
+                lista.add(cliente);
             }
 
             return lista;
@@ -228,7 +279,6 @@ public class ClienteDAOImpl implements ClienteDAO {
     
     @Override
     public Cliente buscarPorEmail(String email) {
-        
         PreparedStatement st = null;
         ResultSet rs = null;
 
@@ -238,8 +288,8 @@ public class ClienteDAOImpl implements ClienteDAO {
                 "u.id AS user_id, u.nome, u.sobrenome, u.data_nascimento, u.senha, u.cpf, u.email, " +
                 "e.id AS end_id, e.estado, e.municipio, e.bairro, e.rua, e.numero, e.complemento, " +
                 "t.id AS tel_id, t.numero AS telefone_numero, " +
-                "d.id AS db_id, d.codigo_agencia, d.codigo_banco, d.numero_conta " +
-                "FROM cliente c " +
+                "d.id AS db_id, d.codigo_agencia, d.numero_conta, d.codigo_banco " +
+                "FROM clientes c " +
                 "INNER JOIN usuarios u ON c.id = u.id " +
                 "LEFT JOIN enderecos e ON u.id_endereco = e.id " +
                 "LEFT JOIN telefones t ON u.id_telefone = t.id " +
@@ -251,7 +301,52 @@ public class ClienteDAOImpl implements ClienteDAO {
             rs = st.executeQuery();
 
             if (rs.next()) {
-                return instantiateCliente(rs);
+                // --- Criar Endereco ---
+                Endereco endereco = new Endereco();
+                endereco.setId(rs.getInt("end_id"));
+                endereco.setEstado(rs.getString("estado"));
+                endereco.setMunicipio(rs.getString("municipio"));
+                endereco.setBairro(rs.getString("bairro"));
+                endereco.setRua(rs.getString("rua"));
+                endereco.setNumero(rs.getString("numero"));
+                endereco.setComplemento(rs.getString("complemento"));
+
+                // --- Criar Telefone ---
+                Telefone telefone = new Telefone();
+                telefone.setId(rs.getInt("tel_id"));
+                telefone.setNumero(rs.getString("telefone_numero"));
+
+                // --- Criar Dados Bancários ---
+                DadosBancarios dados = new DadosBancarios(
+                    rs.getString("codigo_agencia"),
+                    rs.getString("numero_conta"),
+                    rs.getString("codigo_banco")
+                );
+                dados.setId(rs.getInt("db_id"));
+
+                // --- Criar Usuario ---
+                Usuario usuario = new Usuario();
+                usuario.setId(rs.getInt("user_id"));
+                usuario.setNome(rs.getString("nome"));
+                usuario.setSobrenome(rs.getString("sobrenome"));
+
+                java.sql.Date sqlData = rs.getDate("data_nascimento");
+                if (sqlData != null) {
+                    usuario.setDataDeNascimento(sqlData.toLocalDate());
+                }
+
+                usuario.setSenha(rs.getString("senha"));
+                usuario.setCpf(rs.getString("cpf"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setEndereco(endereco);
+                usuario.setTelefone(telefone);
+                usuario.setDadosBancarios(dados);
+
+                // --- Criar Cliente ---
+                Cliente cliente = new Cliente(usuario);
+                cliente.setId(rs.getInt("client_id"));
+
+                return cliente;
             }
 
             return null;
@@ -266,7 +361,6 @@ public class ClienteDAOImpl implements ClienteDAO {
 
     @Override
     public Cliente buscarPorCpf(String cpf) {
-        
         PreparedStatement st = null;
         ResultSet rs = null;
 
@@ -276,8 +370,8 @@ public class ClienteDAOImpl implements ClienteDAO {
                 "u.id AS user_id, u.nome, u.sobrenome, u.data_nascimento, u.senha, u.cpf, u.email, " +
                 "e.id AS end_id, e.estado, e.municipio, e.bairro, e.rua, e.numero, e.complemento, " +
                 "t.id AS tel_id, t.numero AS telefone_numero, " +
-                "d.id AS db_id, d.codigo_agencia, d.codigo_banco, d.numero_conta " +
-                "FROM cliente c " +
+                "d.id AS db_id, d.codigo_agencia, d.numero_conta, d.codigo_banco " +
+                "FROM clientes c " +
                 "INNER JOIN usuarios u ON c.id = u.id " +
                 "LEFT JOIN enderecos e ON u.id_endereco = e.id " +
                 "LEFT JOIN telefones t ON u.id_telefone = t.id " +
@@ -289,7 +383,52 @@ public class ClienteDAOImpl implements ClienteDAO {
             rs = st.executeQuery();
 
             if (rs.next()) {
-                return instantiateCliente(rs);
+                // --- Criar Endereco ---
+                Endereco endereco = new Endereco();
+                endereco.setId(rs.getInt("end_id"));
+                endereco.setEstado(rs.getString("estado"));
+                endereco.setMunicipio(rs.getString("municipio"));
+                endereco.setBairro(rs.getString("bairro"));
+                endereco.setRua(rs.getString("rua"));
+                endereco.setNumero(rs.getString("numero"));
+                endereco.setComplemento(rs.getString("complemento"));
+
+                // --- Criar Telefone ---
+                Telefone telefone = new Telefone();
+                telefone.setId(rs.getInt("tel_id"));
+                telefone.setNumero(rs.getString("telefone_numero"));
+
+                // --- Criar Dados Bancários ---
+                DadosBancarios dados = new DadosBancarios(
+                    rs.getString("codigo_agencia"),
+                    rs.getString("numero_conta"),
+                    rs.getString("codigo_banco")
+                );
+                dados.setId(rs.getInt("db_id"));
+
+                // --- Criar Usuario ---
+                Usuario usuario = new Usuario();
+                usuario.setId(rs.getInt("user_id"));
+                usuario.setNome(rs.getString("nome"));
+                usuario.setSobrenome(rs.getString("sobrenome"));
+
+                java.sql.Date sqlData = rs.getDate("data_nascimento");
+                if (sqlData != null) {
+                    usuario.setDataDeNascimento(sqlData.toLocalDate());
+                }
+
+                usuario.setSenha(rs.getString("senha"));
+                usuario.setCpf(rs.getString("cpf"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setEndereco(endereco);
+                usuario.setTelefone(telefone);
+                usuario.setDadosBancarios(dados);
+
+                // --- Criar Cliente ---
+                Cliente cliente = new Cliente(usuario);
+                cliente.setId(rs.getInt("client_id"));
+
+                return cliente;
             }
 
             return null;
@@ -302,9 +441,9 @@ public class ClienteDAOImpl implements ClienteDAO {
         }
     }
 
+
     @Override
     public List<Cliente> buscarPorNome(String nome) {
-        
         PreparedStatement st = null;
         ResultSet rs = null;
         List<Cliente> lista = new ArrayList<>();
@@ -315,13 +454,13 @@ public class ClienteDAOImpl implements ClienteDAO {
                 "u.id AS user_id, u.nome, u.sobrenome, u.data_nascimento, u.senha, u.cpf, u.email, " +
                 "e.id AS end_id, e.estado, e.municipio, e.bairro, e.rua, e.numero, e.complemento, " +
                 "t.id AS tel_id, t.numero AS telefone_numero, " +
-                "d.id AS db_id, d.codigo_agencia, d.codigo_banco, d.numero_conta " +
-                "FROM cliente c " +
+                "d.id AS db_id, d.codigo_agencia, d.numero_conta, d.codigo_banco " +
+                "FROM clientes c " +
                 "INNER JOIN usuarios u ON c.id = u.id " +
                 "LEFT JOIN enderecos e ON u.id_endereco = e.id " +
                 "LEFT JOIN telefones t ON u.id_telefone = t.id " +
                 "LEFT JOIN dados_bancarios d ON u.id_dados_bancarios = d.id " +
-                "WHERE u.nome LIKE ?" +
+                "WHERE u.nome LIKE ? " +
                 "ORDER BY u.nome"
             );
 
@@ -329,7 +468,52 @@ public class ClienteDAOImpl implements ClienteDAO {
             rs = st.executeQuery();
 
             while (rs.next()) {
-                lista.add(instantiateCliente(rs));
+                // --- Criar Endereco ---
+                Endereco endereco = new Endereco();
+                endereco.setId(rs.getInt("end_id"));
+                endereco.setEstado(rs.getString("estado"));
+                endereco.setMunicipio(rs.getString("municipio"));
+                endereco.setBairro(rs.getString("bairro"));
+                endereco.setRua(rs.getString("rua"));
+                endereco.setNumero(rs.getString("numero"));
+                endereco.setComplemento(rs.getString("complemento"));
+
+                // --- Criar Telefone ---
+                Telefone telefone = new Telefone();
+                telefone.setId(rs.getInt("tel_id"));
+                telefone.setNumero(rs.getString("telefone_numero"));
+
+                // --- Criar Dados Bancários ---
+                DadosBancarios dados = new DadosBancarios(
+                    rs.getString("codigo_agencia"),
+                    rs.getString("numero_conta"),
+                    rs.getString("codigo_banco")
+                );
+                dados.setId(rs.getInt("db_id"));
+
+                // --- Criar Usuario ---
+                Usuario usuario = new Usuario();
+                usuario.setId(rs.getInt("user_id"));
+                usuario.setNome(rs.getString("nome"));
+                usuario.setSobrenome(rs.getString("sobrenome"));
+
+                java.sql.Date sqlData = rs.getDate("data_nascimento");
+                if (sqlData != null) {
+                    usuario.setDataDeNascimento(sqlData.toLocalDate());
+                }
+
+                usuario.setSenha(rs.getString("senha"));
+                usuario.setCpf(rs.getString("cpf"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setEndereco(endereco);
+                usuario.setTelefone(telefone);
+                usuario.setDadosBancarios(dados);
+
+                // --- Criar Cliente ---
+                Cliente cliente = new Cliente(usuario);
+                cliente.setId(rs.getInt("client_id"));
+
+                lista.add(cliente);
             }
 
             return lista;
@@ -342,74 +526,5 @@ public class ClienteDAOImpl implements ClienteDAO {
         }
     }
 
-    @Override
-    public Carrinho buscarCarrinhoDoCliente(int idCliente) {
-        
-        throw new UnsupportedOperationException("Método 'buscarCarrinhoDoCliente' não implementado neste DAO. Delegue ao Service.");
-    }
 
-    @Override
-    public List<Pedido> listarPedidosDoCliente(int idCliente) {
-        
-        throw new UnsupportedOperationException("Método 'listarPedidosDoCliente' não implementado neste DAO. Delegue ao Service.");
-    }
 }
-=======
-public class ClienteDAOimpl implements ClienteDAO {
-    /*
-     * @Override
-     * Cliente inserir(Cliente cliente){
-     * 
-     * }
-     * 
-     * @Override
-     * boolean atualizar(Cliente cliente) {
-     * // código do CRUD com o BD
-     * }
-     * 
-     * @Override
-     * boolean deletar(int id) {
-     * // código do CRUD com o BD
-     * }
-     * 
-     * @Override
-     * Cliente buscarPorId(int id) {
-     * // código do CRUD com o BD
-     * }
-     * 
-     * @Override
-     * List<Cliente> listarTodos() {
-     * // código do CRUD com o BD
-     * }
-     * 
-     * 
-     * // Específicos
-     * 
-     * @Override
-     * Cliente buscarPorEmail(String email) {
-     * // código do CRUD com o BD
-     * }
-     * 
-     * @Override
-     * Cliente buscarPorCpf(String cpf) {
-     * // código do CRUD com o BD
-     * }
-     * 
-     * @Override
-     * List<Cliente> buscarPorNome(String nome) {
-     * // código do CRUD com o BD
-     * }
-     * 
-     * @Override
-     * Carrinho buscarCarrinhoDoCliente(int idCliente) {
-     * // código do CRUD com o BD
-     * }
-     * 
-     * @Override
-     * List<Pedido> listarPedidosDoCliente(int idCliente) {
-     * // código do CRUD com o BD
-     * }
-     * 
-     */
-}
->>>>>>> luciano

@@ -4,52 +4,123 @@ import java.util.List;
 
 import db.DB;
 import impl.ClienteDAOImpl;
-import model.Carrinho;
 import model.Cliente;
-import model.Pedido;
+import model.DadosBancarios;
+import model.Endereco;
+import model.Telefone;
 import model.Usuario;
 
 public class ClienteService {
     
     private ClienteDAOImpl clienteDAOImpl;
-    private UsuarioService usuarioService;
-    private CarrinhoService carrinhoService;
-    private PedidoService pedidoService;
+
 
     public ClienteService() {
         clienteDAOImpl = new ClienteDAOImpl(DB.getConnection());
-        usuarioService = new UsuarioService();
-        carrinhoService = new CarrinhoService();
-        pedidoService = new PedidoService();
     } 
 
     public ClienteDAOImpl getClienteDAOImpl() {
         return clienteDAOImpl;
     }
 
-    public Cliente inserir(Cliente cliente){ 
-        Usuario usuarioInserido = usuarioService.inserirUsuario(cliente);
-        
-        cliente.setId(usuarioInserido.getId());
+    public Cliente inserir(Cliente cliente) {
+        try {
+            // Inserir endereço
+            EnderecoService enderecoService = new EnderecoService();
+            Endereco endereco = cliente.getEndereco();
+            cliente.setEndereco(enderecoService.inserir(endereco));
 
-        return clienteDAOImpl.inserir(cliente);
+            // Inserir telefone
+            TelefoneService telefoneService = new TelefoneService();
+            Telefone telefone = cliente.getTelefone();
+            cliente.setTelefone(telefoneService.inserirTelefone(telefone));
+
+            // Inserir dados bancários
+            DadosBancariosService dadosBancariosService = new DadosBancariosService();
+            DadosBancarios dadosBancarios = cliente.getDadosBancarios();
+            cliente.setDadosBancarios(dadosBancariosService.inserirDadosBancarios(dadosBancarios));
+
+            // Inserir usuário
+            UsuarioService usuarioService = new UsuarioService();
+            Usuario usuario = new Usuario(cliente); // converte Cliente para Usuario
+            Usuario usuarioInserido = usuarioService.inserirUsuario(usuario);
+            cliente.setId(usuarioInserido.getId());
+
+            // Inserir cliente
+            return clienteDAOImpl.inserir(cliente);
+
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     public boolean atualizar(Cliente cliente) {
-        usuarioService.atualizar(cliente);
+        try {
+            // Atualizar endereço
+            EnderecoService enderecoService = new EnderecoService();
+            Endereco endereco = cliente.getEndereco();
+            enderecoService.atualizar(endereco);
 
-        return clienteDAOImpl.atualizar(cliente);
+            // Atualizar telefone
+            TelefoneService telefoneService = new TelefoneService();
+            Telefone telefone = cliente.getTelefone();
+            telefoneService.atualizar(telefone);
+
+            // Atualizar dados bancários
+            DadosBancariosService dadosBancariosService = new DadosBancariosService();
+            DadosBancarios dadosBancarios = cliente.getDadosBancarios();
+            dadosBancariosService.atualizar(dadosBancarios);
+
+            // Atualizar usuário
+            UsuarioService usuarioService = new UsuarioService();
+            Usuario usuario = new Usuario(cliente); // converte Cliente para Usuario
+            usuario.setId(cliente.getId()); // mantém o mesmo ID
+            usuarioService.atualizar(usuario);
+
+            // Atualizar cliente
+            return clienteDAOImpl.atualizar(cliente);
+
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     public boolean deletar(int id) {
-        // 1. O ClienteDAOImpl deleta apenas o cliente
-        boolean clienteDeletado = clienteDAOImpl.deletar(id);
+        try {
+            // Buscar cliente completo
+            Cliente cliente = clienteDAOImpl.buscarPorId(id);
+            if (cliente == null) {
+                return false; // não existe
+            }
 
-        // 2. O UsuarioService deleta o usuario e suas dependências
-        if (clienteDeletado) {
-             return usuarioService.deletar(id);
+            // Deletar dados bancários
+            DadosBancariosService dadosBancariosService = new DadosBancariosService();
+            if (cliente.getDadosBancarios() != null) {
+                dadosBancariosService.deletar(cliente.getDadosBancarios().getId());
+            }
+
+            // Deletar telefone
+            TelefoneService telefoneService = new TelefoneService();
+            if (cliente.getTelefone() != null) {
+                telefoneService.deletar(cliente.getTelefone().getId());
+            }
+
+            // Deletar endereço
+            EnderecoService enderecoService = new EnderecoService();
+            if (cliente.getEndereco() != null) {
+                enderecoService.deletar(cliente.getEndereco().getId());
+            }
+
+            // Deletar usuário
+            UsuarioService usuarioService = new UsuarioService();
+            usuarioService.deletar(cliente.getId());
+
+            // Deletar cliente
+            return clienteDAOImpl.deletar(id);
+
+        } catch (Exception e) {
+            throw e;
         }
-        return false;
     }
 
     public Cliente buscarPorId(int id) {
@@ -72,11 +143,4 @@ public class ClienteService {
         return clienteDAOImpl.buscarPorNome(nome);
     }
 
-    public Carrinho buscarCarrinhoDoCliente(int idCliente) {
-        return carrinhoService.buscarPorCliente(idCliente);
-    }
-
-    public List<Pedido> listarPedidosDoCliente(int idCliente) {
-        return pedidoService.listarPedidosDoCliente(idCliente);
-    }
 }
