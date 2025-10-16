@@ -15,17 +15,17 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
     @Override
     public Usuario inserir(Usuario usuario) {
-        String sql = "INSERT INTO usuarios (nome, sobrenome, senha, data_nascimento, cpf, telefone, endereco, email, dados_bancarios) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO usuarios (nome, sobrenome, senha, data_nascimento, cpf, id_telefone, id_endereco, email, id_dados_bancarios) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, usuario.getNome());
             stmt.setString(2, usuario.getSobrenome());
             stmt.setString(3, usuario.getSenha());
             stmt.setDate(4, Date.valueOf(usuario.getDataDeNascimento()));
             stmt.setString(5, usuario.getCpf());
-            stmt.setString(6, usuario.getTelefone().toString()); // Supondo que Telefone tem um método toString()
-            stmt.setString(7, usuario.getEndereco().toString()); // Supondo que Endereco tem um método toString()
+            stmt.setInt(6, usuario.getTelefone().getId()); // Supondo que Telefone tem um método toString()
+            stmt.setInt(7, usuario.getEndereco().getId()); // Supondo que Endereco tem um método toString()
             stmt.setString(8, usuario.getEmail());
-            stmt.setString(9, usuario.getDadosBancarios().toString()); // Supondo que DadosBancarios tem um método toString()
+            stmt.setInt(9, usuario.getDadosBancarios().getId()); // Supondo que DadosBancarios tem um método toString()
             
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected > 0) {

@@ -118,13 +118,13 @@ public class App {
         sc.nextLine();
 
         String nomeCategoria = switch (cat) {
-            case 1 -> "Blusas";
-            case 2 -> "Saias";
-            case 3 -> "Shorts";
-            case 4 -> "Calças";
-            case 5 -> "Macacão";
-            case 6 -> "Vestido";
-            case 7 -> "Conjunto";
+            case 1 -> "BLUSA";
+            case 2 -> "SAIA";
+            case 3 -> "SHORT";
+            case 4 -> "CALÇA";
+            case 5 -> "MACACÃO";
+            case 6 -> "VESTIDO";
+            case 7 -> "CONJUNTO";
             default -> null;
         };
 
@@ -182,9 +182,16 @@ public class App {
         String numero = sc.nextLine();
         System.out.print("Complemento: ");
         String complemento = sc.nextLine();
+        System.out.println("=== DADOS BANCÁRIOS ===");
+        System.out.print("Código da agência: ");
+        String codigoAgencia = sc.nextLine();
+        System.out.print("Número da conta: ");
+        String numeroConta = sc.nextLine();
+        System.out.print("Código do banco: ");
+        String codigoBanco = sc.nextLine();
 
         clienteController.inserirCliente(nome, sobrenome, ano, mes, dia, senha, cpf, email,
-                null, null, null, estado, municipio, cep, bairro, rua, numero, complemento, telefone);
+                codigoAgencia, numeroConta, codigoBanco, estado, municipio, cep, bairro, rua, numero, complemento, telefone);
 
         System.out.println("\nCliente cadastrado com sucesso!");
     }
@@ -198,7 +205,7 @@ public class App {
         System.out.print("Senha: ");
         String senha = sc.nextLine();
 
-        Funcionario funcionario = funcionarioController.buscarPorId(1); // exemplo simples
+        Funcionario funcionario = funcionarioController.buscarPorId(2); // exemplo simples
         if (funcionario == null) {
             System.out.println("Funcionário não encontrado!");
             return;

@@ -66,7 +66,7 @@ public class FuncionarioController {
     }
 
     public Funcionario buscarPorId(int id) {
-        return buscarPorId(id);
+        return funcionarioService.buscarPorId(id);
     }
 
     public List<Funcionario> listarTodos() {
