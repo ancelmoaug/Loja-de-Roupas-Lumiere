@@ -3,8 +3,11 @@ package service;
 import db.DB;
 import impl.FornecedorDAOImpl;
 import java.util.List;
+
+import model.Endereco;
 import model.Fornecedor;
 import model.ProdutoBase;
+import model.Telefone;
 
 public class FornecedorService {
 
@@ -21,7 +24,20 @@ public class FornecedorService {
     // CRUD Básico
     public Fornecedor inserirFornecedor(Fornecedor fornecedor) {
         try {
+
+            // Inserir endereço
+            EnderecoService enderecoService = new EnderecoService();
+            Endereco endereco = fornecedor.getEndereco();
+            fornecedor.setEndereco(enderecoService.inserir(endereco));
+
+            // Inserir telefone
+            TelefoneService telefoneService = new TelefoneService();
+            Telefone telefone = fornecedor.getTelefoneComercial();
+            fornecedor.setTelefoneComercial(telefoneService.inserirTelefone(telefone));
+
+            // Inserir fornecedor
             return fornecedorDAOImpl.inserir(fornecedor);
+
         } catch (Exception e) {
             throw e;
         }

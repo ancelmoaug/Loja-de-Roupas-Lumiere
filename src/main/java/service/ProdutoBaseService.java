@@ -21,6 +21,11 @@ public class ProdutoBaseService {
             System.out.println("Produto inválido!");
             return null;
         }
+
+        CategoriaService categoriaService = new CategoriaService();
+        String nomeCategoria = produto.getCategoria().getNomeCategoria();
+        int idCategoria = categoriaService.buscarPorCategoria(nomeCategoria);
+        produto.getCategoria().setId(idCategoria);
         return produtoBaseDAOImpl.inserir(produto);
     }
 

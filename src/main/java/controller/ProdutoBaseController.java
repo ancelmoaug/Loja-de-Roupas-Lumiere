@@ -19,9 +19,10 @@ public class ProdutoBaseController {
     }
 
     public ProdutoBase inserirProduto(String nome, String descricao, double precoBase, 
-                                  Categoria categoria, List<VariacaoProduto> variacoes, 
+                                  String nomeCategoria, List<VariacaoProduto> variacoes, 
                                   List<MedidaTamanho> medidasPorTamanho, Fornecedor fornecedor) {
-
+        
+        Categoria categoria = new Categoria(nomeCategoria);
         ProdutoBase produto = new ProdutoBase(nome, descricao, precoBase, categoria, fornecedor);
         return produtoBaseService.inserir(produto);
     }

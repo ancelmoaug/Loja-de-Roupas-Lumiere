@@ -322,13 +322,13 @@ public class App {
         sc.nextLine();
 
         String nomeCategoria = switch (cat) {
-            case 1 -> "Blusas";
-            case 2 -> "Saias";
-            case 3 -> "Shorts";
-            case 4 -> "Calças";
-            case 5 -> "Macacão";
-            case 6 -> "Vestido";
-            case 7 -> "Conjunto";
+            case 1 -> "BLUSA";
+            case 2 -> "SAIA";
+            case 3 -> "SHORT";
+            case 4 -> "CALÇA";
+            case 5 -> "MACACÃO";
+            case 6 -> "VESTIDO";
+            case 7 -> "CONJUNTO";
             default -> null;
         };
 
@@ -337,10 +337,10 @@ public class App {
             return;
         }
 
-        Categoria categoria = new Categoria(nomeCategoria);
-
-        produtoBaseController.inserirProduto(nome, descricao, preco, categoria, null, null, fornecedor);
-        System.out.println("Produto cadastrado com sucesso!");
+        if(produtoBaseController.inserirProduto(nome, descricao, preco, nomeCategoria, null, null, fornecedor) instanceof ProdutoBase) {
+            System.out.println("Produto cadastrado com sucesso!");
+        }
+        
     }
 
     private static void limparTela() {
