@@ -4,5 +4,4 @@
 bin/
 out/
 target/
->>>>>>> origin/jdbc
 *.class
